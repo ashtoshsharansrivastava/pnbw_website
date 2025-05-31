@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PNBW OFFICIALS</title>
+  <!-- Link to our CSS file -->
+  <link rel="stylesheet" href="frontend.css" />
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <h1>PNBW OFFICIALS</h1>
+    <nav>
+      <button id="home-btn">Home</button>
+      <button id="broker-btn" style="display:none;">Broker Dashboard</button>
+      <button id="admin-btn" style="display:none;">Admin Panel</button>
+    </nav>
+    <div class="user-area">
+      <span id="user-status"></span>
+      <button id="login-btn">Login</button>
+    </div>
+  </header>
+
+  <!-- ===== Sections ===== -->
+  <main>
+    <!-- Home Section -->
+    <section id="home-section">
+      <!-- Search and Filters could go here in future -->
+      <section id="properties" class="grid"></section>
+
+      <section id="about">
+        <h2>About PNBW OFFICIALS</h2>
+        <p>
+          PNBW OFFICIALS is a premier real estate brokerage offering plots,
+          houses, and land across India's most sought-after regions. With a
+          growing network of brokers, we provide seamless property transactions,
+          transparent pricing, and referral bonuses to reward our partners. Our
+          mission is to boost property sales, expand our membership community,
+          and enhance enquiry rates through exceptional service and an intuitive
+          platform.
+        </p>
+      </section>
+    </section>
+
+    <!-- Broker Dashboard Section -->
+    <section id="broker-section" class="dashboard" style="display:none;">
+      <h2>Broker Dashboard</h2>
+      <div id="broker-info">
+        <p>Your Referral Code: <span id="ref-code"></span></p>
+        <p>Leads Referred: <span id="leads-count"></span></p>
+        <p>Total Commission Earned: ₹<span id="commission-amt"></span></p>
+      </div>
+      <h3>Your Listed Properties</h3>
+      <ul id="broker-properties"></ul>
+    </section>
+
+    <!-- Admin Panel Section -->
+    <section id="admin-section" class="dashboard" style="display:none;">
+      <h2>Admin Panel</h2>
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn" data-target="leads-tab">Leads Tracking</button>
+        <button class="tab-btn" data-target="comm-tab">Commission Dashboard</button>
+        <button class="tab-btn" data-target="user-tab">User & Broker Management</button>
+      </div>
+      <div class="tab-content">
+        <div id="leads-tab" class="tab-pane" style="display:none;">
+          <h3>Leads Tracking</h3>
+          <table>
+            <thead>
+              <tr><th>Broker</th><th>Referral Code</th><th>Leads Generated</th></tr>
+            </thead>
+            <tbody id="leads-table"></tbody>
+          </table>
+        </div>
+        <div id="comm-tab" class="tab-pane" style="display:none;">
+          <h3>Commission Dashboard</h3>
+          <table>
+            <thead>
+              <tr><th>Broker</th><th>Commission Earned (₹)</th><th>Bonus Earned (₹)</th></tr>
+            </thead>
+            <tbody id="comm-table"></tbody>
+          </table>
+        </div>
+        <div id="user-tab" class="tab-pane" style="display:none;">
+          <h3>User & Broker Management</h3>
+          <table>
+            <thead>
+              <tr><th>Phone</th><th>Role</th><th>Status</th></tr>
+            </thead>
+            <tbody id="user-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Link to our JavaScript file -->
+  <script src="frontend.js"></script>
+</body>
+</html>
