@@ -1,232 +1,441 @@
-// script.js
+// ==============================
+// 1. DATA DEFINITIONS
+// ==============================
 
-// 1. Hard‐coded property list, now with status field
-//   Make sure your images live in an 'images/' folder at the same level as index.html
+// 1a. Property list with multiple images
 const properties = [
   {
     id: 1,
     title: 'Sunset Villa, Goa',
     price: 9500000,
-    image: 'images/villa_goa.jpg',
-    status: 'Ready to Move'
+    images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
+    status: 'Ready to Move',
+    rating: 4,
+    description: 'A beautiful villa overlooking the Arabian Sea. 3 BHK, 2 baths, private garden.'
+    
   },
   {
     id: 2,
     title: 'Oceanview Plot, Kerala',
     price: 1800000,
-    image: 'images/plot_kerala.jpg',
-    status: 'Under Construction'
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Under Construction',
+    rating: 3,
+    description: 'Seaside plot in Kerala. Ideal for building your dream home. 200 sq. yards.'
   },
   {
     id: 3,
     title: 'Skyline Apartment, Mumbai',
     price: 6200000,
-    image: 'images/apartment_mumbai.jpg',
-    status: 'Resale'
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai3.jpg'],
+    status: 'Resale',
+    rating: 5,
+    description: 'Luxury 2 BHK apartment in the heart of Mumbai, with panoramic city views.'
   },
   {
     id: 4,
     title: 'Green Fields Land, Punjab',
     price: 3000000,
-    image: 'images/land_punjab.jpg',
-    status: 'Ready to Move'
+    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    status: 'Ready to Move',
+    rating: 2,
+    description: '50 acres of fertile farmland, perfect for commercial agriculture.'
   },
   {
     id: 5,
     title: 'Hilltop Cottage, Himachal',
     price: 4200000,
-    image: 'images/cottage_himachal.jpg',
-    status: 'Under Construction'
+    images: ['himachal.jpg', 'himachal2.jpg', 'himachal3.jpg'],
+    status: 'Under Construction',
+    rating: 3,
+    description: 'Charming cottage under construction with Himalayan views. 2 BHK, balcony.'
   },
   {
     id: 6,
     title: 'Desert Oasis Plot, Rajasthan',
     price: 2500000,
-    image: 'images/plot_rajasthan.jpg',
-    status: 'Resale'
+    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    status: 'Resale',
+    rating: 4,
+    description: 'Plot in the Thar Desert, near Jaisalmer. Ideal for a desert resort project.'
   }
 ];
 
-// 2. Hard-coded broker & user data (simulate backend data)
 const brokers = [
-  { phone: '9999990001', refCode: 'BRK001', leads: 5, commission: 50000, bonus: 10000, properties: [1,3] },
-  { phone: '9999990002', refCode: 'BRK002', leads: 2, commission: 20000, bonus: 4000, properties: [2,4] },
-  { phone: '9999990003', refCode: 'BRK003', leads: 0, commission: 0, bonus: 0, properties: [5] }
+  { phone: '9999990001', refCode: 'BRK001', leads: 5, commission: 50000, bonus: 10000, properties: [1, 3] },
+  { phone: '9999990002', refCode: 'BRK002', leads: 2, commission: 20000, bonus: 4000,  properties: [2, 4] },
+  { phone: '9999990003', refCode: 'BRK003', leads: 0, commission: 0,     bonus: 0,     properties: [5] }
 ];
 
 const users = [
-  { phone: '0000000000', role: 'admin', status: 'active' },
-  { phone: '9999990001', role: 'broker', status: 'active' },
-  { phone: '9999990002', role: 'broker', status: 'active' },
-  { phone: '9999990003', role: 'broker', status: 'disabled' },
-  { phone: '8888880004', role: 'customer', status: 'active' }
+  { phone: '0000000000', email: 'admin@gmail.com', role: 'admin',   status: 'active' },
+  { phone: '9999990001', role: 'broker',  status: 'active' },
+  { phone: '9999990002', role: 'broker',  status: 'active' },
+  { phone: '9999990003', role: 'broker',  status: 'disabled' },
+  { phone: '8888880004', role: 'customer',status: 'active' }
 ];
 
-// 3. Track “logged-in user” (phone) in localStorage
 let currentUser = localStorage.getItem('pnbw_user') || null;
 let currentRole = null;
 
-// 4. When DOM is ready, initialize UI
+// ==============================
+// 2. DOMContentLoaded SETUP
+// ==============================
 document.addEventListener('DOMContentLoaded', () => {
+  setupSidePanel();
   setupNavigation();
   renderUserStatus();
   renderProperties();
-  document.getElementById('login-btn').addEventListener('click', login);
-  document.getElementById('home-btn').addEventListener('click', showHome);
-  document.getElementById('broker-btn').addEventListener('click', showBrokerDashboard);
-  document.getElementById('admin-btn').addEventListener('click', showAdminPanel);
-
-  // If logged in, set role and show relevant nav
-  if (currentUser) {
-    const usr = users.find(u => u.phone === currentUser);
-    if (usr) currentRole = usr.role;
-    updateNavByRole();
-  }
+  attachEventListeners();
 });
 
-// 5. Navigation logic
-function setupNavigation() {
-  // Default view: Home
-  showHome();
-}
-function updateNavByRole() {
-  const brokerBtn = document.getElementById('broker-btn');
-  const adminBtn = document.getElementById('admin-btn');
+// ==============================
+// 3. SIDE PANEL (SOCIAL ICONS)
+// ==============================
+function setupSidePanel() {
+  const sidePanel = document.getElementById('side-panel');
+  sidePanel.className = 'side-panel';
 
-  if (currentRole === 'broker') {
-    brokerBtn.style.display = 'inline-block';
-    adminBtn.style.display = 'none';
-  } else if (currentRole === 'admin') {
-    adminBtn.style.display = 'inline-block';
-    brokerBtn.style.display = 'none';
-  } else {
-    brokerBtn.style.display = 'none';
-    adminBtn.style.display = 'none';
+  const socials = [
+    { href: 'https://instagram.com/PNBWOfficial', imgSrc: 'images/ig.png', alt: 'Instagram' },
+    { href: 'https://linkedin.com/company/PNBWOfficial', imgSrc: 'images/linkdin.png', alt: 'LinkedIn' },
+    { href: 'https://www.facebook.com/profile.php?id=61576669505023&mibextid=ZbWKwL', imgSrc: 'images/facebook.png', alt: 'Facebook' },
+    { href: 'mailto:support@pnbwofficial.com', imgSrc: 'images/gmail.png', alt: 'Gmail' },
+    { href: 'https://github.com/PNBWOfficial', imgSrc: 'images/github.png', alt: 'GitHub' }
+  ];
+
+  socials.forEach(s => {
+    const a = document.createElement('a');
+    a.href = s.href;
+    a.target = '_blank';
+    a.setAttribute('aria-label', s.alt);
+
+    const img = document.createElement('img');
+    img.src = s.imgSrc;
+    img.alt = s.alt;
+    img.className = 'side-icon';
+
+    a.appendChild(img);
+    sidePanel.appendChild(a);
+  });
+}
+
+// ==============================
+// 4. NAVIGATION & EVENT LISTENERS
+// ==============================
+function attachEventListeners() {
+  // Login modal
+  document.getElementById('login-btn').addEventListener('click', onLoginButtonClick);
+  document.getElementById('login-close').addEventListener('click', closeLoginModal);
+  document.getElementById('login-modal').addEventListener('click', onModalClickOutside);
+  document.getElementById('send-otp-btn').addEventListener('click', onSendOtp);
+  document.getElementById('verify-otp-btn').addEventListener('click', onVerifyOtp);
+
+  // Property details modal close
+  document.getElementById('property-close').addEventListener('click', closePropertyModal);
+  document.getElementById('property-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('property-modal')) {
+      closePropertyModal();
+    }
+  });
+
+  // Navigation buttons (once logged in)
+  document.getElementById('home-btn')?.addEventListener('click', showHome);
+  document.getElementById('broker-btn')?.addEventListener('click', showBrokerDashboard);
+  document.getElementById('admin-btn')?.addEventListener('click', showAdminPanel);
+}
+
+function setupNavigation() {
+  if (currentUser) {
+    const usr = users.find(u => u.phone === currentUser);
+    currentRole = usr ? usr.role : 'customer';
+    updateNavByRole();
   }
 }
-function showHome() {
-  document.getElementById('home-section').style.display = 'block';
-  document.getElementById('broker-section').style.display = 'none';
-  document.getElementById('admin-section').style.display = 'none';
+
+function updateNavByRole() {
+  const brokerBtn = document.getElementById('broker-btn');
+  const adminBtn  = document.getElementById('admin-btn');
+
+  if (brokerBtn) brokerBtn.style.display = 'none';
+  if (adminBtn)  adminBtn.style.display = 'none';
+
+  if (currentRole === 'broker') {
+    brokerBtn?.style.setProperty('display', 'inline-block');
+  } else if (currentRole === 'admin') {
+    adminBtn?.style.setProperty('display', 'inline-block');
+  }
 }
+
+function showHome() {
+  document.getElementById('home-section').style.display   = 'block';
+  document.getElementById('broker-section').style.display = 'none';
+  document.getElementById('admin-section').style.display  = 'none';
+}
+
 function showBrokerDashboard() {
-  document.getElementById('home-section').style.display = 'none';
+  document.getElementById('home-section').style.display   = 'none';
   document.getElementById('broker-section').style.display = 'block';
-  document.getElementById('admin-section').style.display = 'none';
+  document.getElementById('admin-section').style.display  = 'none';
   renderBrokerDashboard();
 }
+
 function showAdminPanel() {
-  document.getElementById('home-section').style.display = 'none';
+  document.getElementById('home-section').style.display   = 'none';
   document.getElementById('broker-section').style.display = 'none';
-  document.getElementById('admin-section').style.display = 'block';
+  document.getElementById('admin-section').style.display  = 'block';
   renderAdminTabs();
-  // Show first tab by default
   switchTab('leads-tab');
 }
 
-// 6. Update header to show either “Login” or “Logout” + phone
-function renderUserStatus() {
-  const statusEl = document.getElementById('user-status');
-  const btn = document.getElementById('login-btn');
+// ==============================
+// 5. LOGIN MODAL LOGIC
+// ==============================
+const loginModal    = document.getElementById('login-modal');
+const phoneForm     = document.getElementById('contact-form');
+const phoneInput    = document.getElementById('contact-input');
+const otpForm       = document.getElementById('otp-form');
+const otpInput      = document.getElementById('otp-input');
 
+function onLoginButtonClick(e) {
+  e.preventDefault();
   if (currentUser) {
-    statusEl.textContent = `Logged in: ${currentUser}`;
-    btn.textContent = 'Logout';
-  } else {
-    statusEl.textContent = '';
-    btn.textContent = 'Login';
-  }
-}
-
-// 7. Mock login/logout flow
-// - If no user, prompt for phone → store in localStorage
-// - If logged‐in, clear localStorage
-function login() {
-  if (currentUser) {
-    // Logging out
     localStorage.removeItem('pnbw_user');
     currentUser = null;
     currentRole = null;
     updateNavByRole();
     showHome();
+    renderUserStatus();
   } else {
-    // Logging in
-    const phone = prompt('Enter your phone number:');
-    if (phone && phone.trim() !== '') {
-      currentUser = phone.trim();
-      localStorage.setItem('pnbw_user', currentUser);
-      const usr = users.find(u => u.phone === currentUser);
-      currentRole = usr ? usr.role : 'customer';
-      alert('Logged in successfully');
-      updateNavByRole();
-      showHome();
-    }
+    openLoginModal();
   }
+}
+
+function openLoginModal() {
+  loginModal.style.display = 'flex';
+  contactForm.style.display = 'flex';
+  otpForm.style.display   = 'none';
+  contactInput.value        = '';
+  otpInput.value          = '';
+}
+
+function closeLoginModal() {
+  loginModal.style.display = 'none';
+}
+
+function onModalClickOutside(evt) {
+  if (evt.target === loginModal) {
+    closeLoginModal();
+  }
+}
+function onSendOtp() {
+  const contactVal = contactInput.value.trim();
+
+  // Basic pattern checks
+  const phonePattern = /^[0-9]{10}$/;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!phonePattern.test(contactVal) && !emailPattern.test(contactVal)) {
+    alert('Please enter a valid 10-digit phone OR a valid email address.');
+    return;
+  }
+
+  setTimeout(() => {
+    contactForm.style.display = 'none';
+    otpForm.style.display     = 'flex';
+    alert(`OTP has been sent to ${contactVal}. (Simulated)`);
+  }, 500);
+}
+
+function onVerifyOtp() {
+  const otpVal = otpInput.value.trim();
+  if (!/^[0-9]{4,6}$/.test(otpVal)) {
+    alert('Please enter a valid OTP.');
+    return;
+  }
+
+  const contactVal = contactInput.value.trim();
+  currentUser = contactVal;                      // could be phone or email
+  localStorage.setItem('pnbw_user', currentUser);
+
+  const usr = users.find(u => u.phone === currentUser || u.email === currentUser);
+  currentRole = usr ? usr.rolae : 'customer';
+
+  alert('Logged in successfully!');
+  closeLoginModal();
+  updateNavByRole();
+  showHome();
   renderUserStatus();
 }
 
-// 8. Build property cards and insert into #properties grid, including status
+// ==============================
+// 6. HEADER LOGIN STATUS
+// ==============================
+function renderUserStatus() {
+  const statusEl = document.getElementById('user-status');
+  const btn      = document.getElementById('login-btn');
+
+  if (currentUser) {
+    statusEl.textContent = `Logged in: ${currentUser}`;
+    btn.textContent      = 'Logout';
+  } else {
+    statusEl.textContent = '';
+    btn.textContent      = 'Login';
+  }
+}
+
+// ==============================
+// 7. PROPERTY RENDERING (MULTIPLE IMAGES & STATUS BADGE)
+// ==============================
 function renderProperties() {
   const container = document.getElementById('properties');
-  container.innerHTML = ''; // Clear any existing cards
+  container.innerHTML = '';
 
   properties.forEach((p) => {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'card';  // position: relative
 
-    // Status badge color based on status
-    let badgeColor = '#50e3c2'; // default teal
-    if (p.status === 'Resale') badgeColor = '#f5a623';
-    if (p.status === 'Under Construction') badgeColor = '#e94e77';
-    
-    // Each card: status, image → title → price → Enquire button
-    card.innerHTML = `
-      <span class="status-badge" style="background:${badgeColor}">${p.status}</span>
-      <img src="${p.image}" alt="${p.title}" />
-      <div class="card-content">
-        <h3>${p.title}</h3>
-        <p>₹${p.price.toLocaleString()}</p>
-        <button onclick="enquire(${p.id})">Enquire</button>
-      </div>
+    // 1) Status badge
+    const badgeSpan = document.createElement('span');
+    badgeSpan.className = 'status-badge';
+    let badgeColor = '#ffcc00';
+    if (p.status === 'Resale') badgeColor = '#f63a3a';
+    if (p.status === 'Under Construction') badgeColor = '#ff99c9';
+    badgeSpan.style.background = badgeColor;
+    badgeSpan.textContent = p.status;
+    card.appendChild(badgeSpan);
+
+    // 2) Image slider container
+    const sliderDiv = document.createElement('div');
+    sliderDiv.className = 'image-slider';
+    p.images.forEach(imgName => {
+      const imgEl = document.createElement('img');
+      imgEl.src = `images/${imgName}`;
+      imgEl.alt = p.title;
+      imgEl.className = 'slider-image';
+      sliderDiv.appendChild(imgEl);
+    });
+    card.appendChild(sliderDiv);
+
+    // 3) Card content
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'card-content';
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+      stars += i <= p.rating ? '★' : '☆';
+    }
+    contentDiv.innerHTML = `
+      <h3>${p.title}</h3>
+      <p class="stars">${stars}</p>
+      <p>₹${p.price.toLocaleString()}</p>
+      <button onclick="enquire(${p.id})">Enquire</button>
     `;
+    card.appendChild(contentDiv);
 
     container.appendChild(card);
   });
 }
 
-// Called when user clicks “Enquire” on a specific property
+// ==============================
+// 8. ENQUIRE → PROPERTY DETAILS MODAL
+// ==============================
+const propertyModal = document.getElementById('property-modal');
+const propertyClose = document.getElementById('property-close');
+const propertyContainer = document.getElementById('property-details-container');
+
 function enquire(id) {
   if (!currentUser) {
-    alert('Please log in to make an enquiry.');
+    alert('Please log in to view property details.');
     return;
   }
-  const property = properties.find((p) => p.id === id);
-  alert(`Enquiry registered for ${property.title} by ${currentUser}`);
+  const property = properties.find(p => p.id === id);
+  if (!property) return;
+
+  openPropertyModal(property);
 }
 
-// 9. Render Broker Dashboard (fetch data from brokers array)
+function openPropertyModal(property) {
+  // Clear previous content
+  propertyContainer.innerHTML = '';
+
+  // Title
+  const titleEl = document.createElement('h2');
+  titleEl.textContent = property.title;
+  propertyContainer.appendChild(titleEl);
+
+  // Image slider for details
+  const sliderDiv = document.createElement('div');
+  sliderDiv.className = 'property-slider';
+  property.images.forEach(imgName => {
+    const imgEl = document.createElement('img');
+    imgEl.src = `images/${imgName}`;
+    imgEl.alt = property.title;
+    sliderDiv.appendChild(imgEl);
+  });
+  propertyContainer.appendChild(sliderDiv);
+
+  // Property info block
+  const infoDiv = document.createElement('div');
+  infoDiv.className = 'property-info';
+
+  // Status & badge
+  let badgeColor = '#ffcc00';
+  if (property.status === 'Resale') badgeColor = '#f63a3a';
+  if (property.status === 'Under Construction') badgeColor = '#ff99c9';
+
+  infoDiv.innerHTML = `
+    <p><strong>Status:</strong> <span style="color:${badgeColor}; font-weight:600;">${property.status}</span></p>
+    <p><strong>Price:</strong> ₹${property.price.toLocaleString()}</p>
+    <p class="stars"><strong>Rating:</strong> ${'★'.repeat(property.rating) + '☆'.repeat(5 - property.rating)}</p>
+    <p><strong>Description:</strong> ${property.description}</p>
+  `;
+  propertyContainer.appendChild(infoDiv);
+
+  // “Confirm Enquiry” button
+  const confirmBtn = document.createElement('button');
+  confirmBtn.textContent = 'Confirm Enquiry';
+  confirmBtn.style.marginTop = '12px';
+  confirmBtn.onclick = () => {
+    alert(`Enquiry confirmed for "${property.title}" by ${currentUser}.`);
+    closePropertyModal();
+  };
+  propertyContainer.appendChild(confirmBtn);
+
+  // Show the modal
+  propertyModal.style.display = 'flex';
+}
+
+function closePropertyModal() {
+  propertyModal.style.display = 'none';
+  propertyContainer.innerHTML = '';
+}
+
+// ==============================
+// 9. BROKER DASHBOARD RENDERING
+// ==============================
 function renderBrokerDashboard() {
   const brokerData = brokers.find(b => b.phone === currentUser);
   if (!brokerData) return;
 
-  document.getElementById('ref-code').textContent = brokerData.refCode;
-  document.getElementById('leads-count').textContent = brokerData.leads;
+  document.getElementById('ref-code').textContent       = brokerData.refCode;
+  document.getElementById('leads-count').textContent    = brokerData.leads;
   document.getElementById('commission-amt').textContent = brokerData.commission + brokerData.bonus;
 
-  // List of property titles owned by this broker
   const propListEl = document.getElementById('broker-properties');
   propListEl.innerHTML = '';
   brokerData.properties.forEach(pid => {
     const p = properties.find(prop => prop.id === pid);
     if (p) {
       const li = document.createElement('li');
-      li.textContent = p.title + ' (₹' + p.price.toLocaleString() + ')';
+      li.textContent = `${p.title} (₹${p.price.toLocaleString()})`;
       propListEl.appendChild(li);
     }
   });
 }
 
-// 10. Render Admin Tabs content
+// ==============================
+// 10. ADMIN PANEL RENDERING
+// ==============================
 function renderAdminTabs() {
   // Leads Tracking
   const leadsTbody = document.getElementById('leads-table');
@@ -255,13 +464,13 @@ function renderAdminTabs() {
     userTbody.appendChild(row);
   });
 
-  // Attach tab button events
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => switchTab(btn.dataset.target));
   });
 }
+
 function switchTab(targetId) {
   document.querySelectorAll('.tab-pane').forEach(pane => {
-    pane.style.display = pane.id === targetId ? 'block' : 'none';
+    pane.style.display = (pane.id === targetId ? 'block' : 'none');
   });
 }
