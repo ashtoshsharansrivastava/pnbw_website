@@ -9,40 +9,61 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #0e274e;         /* Light red background */
-  color: #333;
+  background: #770303;       /* Dark red background */
+  color: #f0f0f0;            /* Light text color */
   line-height: 1.6;
+  min-height: 100vh;
 }
 
 /* 2. Header */
 header {
-  background: #770303;         /* Bright blue header */
+  background: rgba(0, 0, 0, 0.2); /* semi-transparent black */
+  backdrop-filter: blur(6px);
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header .header-left {
+  display: flex;
+  align-items: center;
+}
+
+header .logo {
+  height: 40px;          /* adjust if needed */
+  margin-right: 0.75rem; /* spacing between logo and title */
 }
 
 header h1 {
   font-size: 1.8rem;
-  color: #fff;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-header nav button {
-  margin-right: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #000879;         /* Teal buttons */
-  color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-header nav button:hover {
-  background: #007c11;
+/* Top navigation links */
+header .top-nav {
+  flex: 1;
+  text-align: center;
 }
 
+header .top-nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #f0f0f0;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.2s;
+}
+
+header .top-nav a:hover {
+  color: #ffcc00;     /* gold on hover */
+  transform: translateY(-2px);
+}
+
+/* User area (status + login) */
 header .user-area {
   display: flex;
   align-items: center;
@@ -51,62 +72,80 @@ header .user-area {
 header #user-status {
   margin-right: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: #e0e0e0;
 }
 
 header #login-btn {
   padding: 0.5rem 1rem;
   border: none;
-  background: #000000;         /* Orange login button */
+  background: #000000;   /* bright red */
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
 }
 header #login-btn:hover {
-  background: #0f0061;
+  background: #080957;
+  transform: translateY(-2px);
 }
 
-/* 3. Main Container */
+/* 3. Social Side Panel */
+.side-panel {
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 90;
+}
+
+.side-panel a img {
+  width: 32px;
+  height: 32px;
+  filter: invert(100%); /* ensures the icon appears white if it's black originally */
+  transition: transform 0.2s;
+}
+
+.side-panel a:hover img {
+  transform: scale(1.1);
+}
+
+/* 4. Main Container */
 main {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
-.dashboard {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* 4. Properties Grid */
+/* 5. Properties Grid */
 .grid {
   display: grid;
-  /* Auto-fill columns with a minimum width of 260px */
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-/* 5. Property Card with Status Badge */
+/* Property Card with Status Badge */
 .card {
   position: relative;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
 }
 
 .card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
+  filter: brightness(0.8);
 }
 
 /* Status badge */
@@ -114,12 +153,13 @@ main {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: #50e3c2;
-  color: #fff;
+  background: #ffcc00;   /* gold/yellow for status */
+  color: #000;
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   font-size: 0.8rem;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .card-content {
@@ -128,46 +168,152 @@ main {
 
 .card-content h3 {
   margin-bottom: 0.6rem;
-  color: #4a4a4a;
+  color: #f0f0f0;
 }
 
 .card-content p {
-  color: #6a6a6a;
+  color: #d0d0d0;
   margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
 .card-content button {
   padding: 0.6rem 1.2rem;
   border: none;
-  background: #f5a623;         /* Orange enquire button */
+  background: #140101;    /* bright red */
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
 }
 .card-content button:hover {
-  background: #d08d1e;
+  background: #070044;
+  transform: translateY(-2px);
 }
 
 /* 6. About Section */
 #about {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.6);
   padding: 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   margin-top: 3rem;
 }
 
 #about h2 {
   margin-bottom: 1rem;
-  color: #4a90e2;               /* Blue heading */
+  color: #ffcc00;         /* gold heading */
 }
 
 #about p {
-  color: #555;
+  color: #d0d0d0;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-/* 7. Dashboard Tables & Tabs */
+/* 7. Services Section */
+.services {
+  margin-top: 3rem;
+}
+
+.services h2 {
+  color: #ffcc00;
+  margin-bottom: 1.5rem;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.service-card h3 {
+  margin-bottom: 0.75rem;
+  color: #f0f0f0;
+}
+
+.service-card p {
+  color: #d0d0d0;
+  font-size: 0.95rem;
+}
+
+/* 8. Intern Section */
+.intern {
+  margin-top: 3rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.intern h2 {
+  color: #ffcc00;
+  margin-bottom: 1rem;
+}
+
+.intern p {
+  color: #d0d0d0;
+  margin-bottom: 1.5rem;
+}
+
+#intern-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#intern-form label {
+  color: #f0f0f0;
+  font-weight: 500;
+}
+
+#intern-form input[type="text"],
+#intern-form input[type="email"],
+#intern-form input[type="tel"],
+#intern-form input[type="file"] {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#intern-form button {
+  width: fit-content;
+  background: #000000;   /* bright red */
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+#intern-form button:hover {
+  background: #9380ff2d;
+  transform: translateY(-2px);
+}
+
+/* 9. Dashboard Tables & Tabs */
+.dashboard {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
 .tabs {
   margin-bottom: 1rem;
 }
@@ -176,14 +322,15 @@ main {
   margin-right: 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background: #50e3c2;
+  background: #a80000;   /* deep red accent */
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
 }
 .tab-btn:hover {
-  background: #3ac9a8;
+  background: #c10000;
+  transform: translateY(-2px);
 }
 
 .tab-pane table {
@@ -192,20 +339,27 @@ main {
   margin-top: 1rem;
 }
 
-.tab-pane th, .tab-pane td {
-  border: 1px solid #ddd;
+.tab-pane th,
+.tab-pane td {
+  border: 1px solid #555;
   padding: 0.8rem;
   text-align: left;
+  color: #f0f0f0;
 }
 
 .tab-pane th {
-  background: #4a90e2;
+  background: #a80000;   /* header row in deep red */
   color: #fff;
 }
 
-/* Responsive Table */
+/* Responsive Table (stack on small screens) */
 @media (max-width: 768px) {
-  .tab-pane table, .tab-pane thead, .tab-pane tbody, .tab-pane th, .tab-pane td, .tab-pane tr {
+  .tab-pane table,
+  .tab-pane thead,
+  .tab-pane tbody,
+  .tab-pane th,
+  .tab-pane td,
+  .tab-pane tr {
     display: block;
   }
   .tab-pane tr {
@@ -220,6 +374,7 @@ main {
     border: none;
     position: relative;
     padding-left: 50%;
+    color: #ddd;
   }
   .tab-pane td:before {
     content: attr(data-label);
@@ -228,5 +383,208 @@ main {
     width: 45%;
     padding-left: 0.8rem;
     font-weight: bold;
+    color: #fff;
   }
 }
+
+/* ========================
+   Login Modal Overlay
+   ======================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75); /* dark translucent backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200; /* above everything else */
+}
+
+/* Modal content box */
+.modal-content {
+  background: #2e0a0a;              /* very dark red/brown */
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Close button (×) */
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.modal-close:hover {
+  color: #ff5555;
+}
+
+/* Heading inside modal */
+.modal-content h2 {
+  color: #ffcc00;           /* gold */
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Both forms share these styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Labels */
+.login-form label {
+  color: #e0e0e0;
+  font-weight: 500;  
+  margin-bottom: 0.3rem;
+}
+
+/* Text inputs */
+.login-form input[type="tel"],
+.login-form input[type="text"] {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #3f1111;     /* slightly lighter dark red */
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.login-form input[type="tel"]:focus,
+.login-form input[type="text"]:focus {
+  background: #550f0f;
+  box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.7);
+}
+
+/* Buttons inside login modal */
+.login-form button {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #ff5555;      /* bright red */
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.login-form button:hover {
+  background: #ff8080;
+  transform: translateY(-2px);
+}
+
+/* Hide OTP form initially */
+#otp-form {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .modal-content {
+    padding: 1.5rem 1.5rem;
+  }
+  .modal-content h2 {
+    font-size: 1.3rem;
+  }
+  .login-form button {
+    font-size: 0.95rem;
+  }
+}
+
+/* ==============================
+   Scrollable Image Slider CSS
+   ============================== */
+
+.image-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* hide scrollbar in Firefox */
+}
+
+/* Hide scrollbar in WebKit-based browsers (Chrome, Safari) */
+.image-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each image in the slider */
+.image-slider img {
+  flex: 0 0 100%;       /* Each image takes up 100% of the card’s width */
+  height: 180px;        /* Match the old single-image height */
+  object-fit: cover;    /* Crop/scale as needed */
+  border-radius: 8px 8px 0 0; /* Rounded top corners to match card */
+}
+
+/* Add a small gap between images */
+.image-slider img + img {
+  margin-left: 0.5rem;
+}
+/* Ensure the card is the positioning context */
+.card {
+  position: relative;
+  overflow: hidden;
+  /* …keep whatever other styles you already have… */
+}
+
+/* Position the badge in the top-left corner, on top of any images */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 8px;
+  color: white;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  z-index: 10;
+}
+/* ============================== */
+/*  Property Details Content */
+/* ============================== */
+
+.property-content h2 {
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+.property-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.property-slider img {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.property-info {
+  margin-bottom: 12px;
+}
+
+.property-info p {
+  margin: 6px 0;
+}
+
+.property-info .stars {
+  color: #ffcc00;
+}
+
