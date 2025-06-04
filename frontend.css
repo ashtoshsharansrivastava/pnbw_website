@@ -1,0 +1,656 @@
+/* ==============================
+   Base / Reset
+   ============================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+/* ==============================
+   Variables / Theme Colors
+   ============================== */
+:root {
+  --primary-color: #770303;    /* deep red accent */
+  --primary-hover: #5e0202;
+  --secondary-bg: #ffffff;
+  --text-color: #333333;
+  --light-bg: #f7f7f7;
+  --badge-ready: #28a745;      /* green for “Ready to Move” */
+  --badge-resale: #dc3545;     /* red for “Resale” */
+  --badge-construction: #ffc107; /* amber for “Under Construction” */
+  --modal-bg: rgba(0, 0, 0, 0.5);
+}
+
+/* ==============================
+   Typography & Utility Classes
+   ============================== */
+
+h1, h2, h3 {
+  color: var(--primary-color);
+}
+
+p {
+  color: var(--text-color);
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.primary-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.choice-btn {
+  background-color: var(--light-bg);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin: 8px;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+.choice-btn:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* ==============================
+   Header / Navigation
+   ============================== */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: var(--secondary-bg);
+  border-bottom: 2px solid var(--primary-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+}
+
+header h1 {
+  font-size: 1.75rem;
+  color: var(--primary-color);
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.top-nav a:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#user-status {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+#login-btn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+#login-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Hamburger (mobile) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 24px;
+  height: 3px;
+  background-color: var(--text-color);
+  border-radius: 2px;
+}
+
+/* ==============================
+   Side Panel (Social Icons)
+   ============================== */
+
+.side-panel {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: transparent;
+  z-index: 90;
+}
+
+.side-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.side-icon:hover {
+  opacity: 1;
+}
+
+/* ==============================
+   Modals (Login & Property) 
+   ============================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal-content {
+  background-color: var(--secondary-bg);
+  padding: 24px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+  margin-bottom: 16px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+/* Login Forms */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.login-form label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.login-form input {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form button {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.login-form button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* OTP Input */
+#otp-input {
+  letter-spacing: 4px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* ==============================
+   Property Detail Modal Styling
+   ============================== */
+
+.property-content {
+  max-width: 600px;
+}
+
+.property-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.property-slider img {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Property Info */
+.property-info h2 {
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.property-info .status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.property-info .price-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.property-info .stars {
+  color: #ffc107;
+  margin-bottom: 8px;
+}
+
+.property-info p {
+  margin-bottom: 8px;
+}
+
+/* Enquiry Form */
+.enquiry-form {
+  margin-top: 16px;
+}
+.enquiry-form textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.enquiry-form button {
+  margin-top: 8px;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.enquiry-form button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==============================
+   Grid of Property Cards
+   ============================== */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 24px auto 0;
+  position: relative;
+}
+#search-input {
+  width: 100%;
+  padding: 10px 36px 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+#clear-search-btn {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #888;
+}
+#clear-search-btn:hover {
+  color: var(--text-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 24px;
+}
+
+.card {
+  position: relative;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Status badge on card */
+.card .status-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* Badge colors based on status */
+.card[data-status="Ready to Move"] .status-badge {
+  background-color: var(--badge-ready);
+}
+.card[data-status="Resale"] .status-badge {
+  background-color: var(--badge-resale);
+}
+.card[data-status="Under Construction"] .status-badge {
+  background-color: var(--badge-construction);
+}
+
+/* Image slider inside each card */
+.image-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+.image-slider img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  transition: transform 0.3s;
+}
+.image-slider img:hover {
+  transform: scale(1.05);
+}
+
+/* Hide scrollbar */
+.image-slider::-webkit-scrollbar {
+  display: none;
+}
+.image-slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Card content */
+.card-content {
+  padding: 12px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: var(--primary-color);
+}
+.card-content .stars {
+  color: #ffc107;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+.card-content p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+.card-content button {
+  align-self: flex-start;
+  padding: 6px 12px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.card-content button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==============================
+   Sections (About, Services, Intern)
+   ============================== */
+
+.info-section {
+  padding: 32px 24px;
+  background-color: var(--secondary-bg);
+  margin-bottom: 16px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.info-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.service-card {
+  background-color: var(--light-bg);
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.service-card h3 {
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+.intern-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+.intern-form label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+.intern-form input {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.intern-form button {
+  margin-top: 8px;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.intern-form button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==============================
+   Broker / Admin Dashboards
+   ============================== */
+
+.dashboard {
+  padding: 24px;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  margin: 24px auto;
+  max-width: 800px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Broker Info */
+.broker-info p {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+/* Broker’s property list */
+.broker-properties {
+  list-style: none;
+  margin-top: 12px;
+}
+.broker-properties li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+/* Admin Tabs */
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  padding: 8px 16px;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.tab-btn.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+.tab-btn:hover:not(.active) {
+  background-color: #ddd;
+}
+.tab-pane {
+  display: none;
+}
+.tab-pane table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.tab-pane th, .tab-pane td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+/* When showing the first tab by default */
+#leads-tab {
+  display: block;
+}
+
+/* ==============================
+   Footer
+   ============================== */
+
+footer {
+  text-align: center;
+  padding: 16px;
+  background-color: var(--secondary-bg);
+  border-top: 1px solid #ddd;
+  margin-top: 32px;
+}
+footer p {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* ==============================
+   Responsive Breakpoints
+   ============================== */
+
+@media (max-width: 768px) {
+  .top-nav {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background-color: var(--secondary-bg);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid #ddd;
+    display: none;
+  }
+  .top-nav a {
+    padding: 12px 24px;
+    border-top: 1px solid #eee;
+  }
+  .hamburger {
+    display: flex;
+  }
+}

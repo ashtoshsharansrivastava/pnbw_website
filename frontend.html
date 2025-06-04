@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PNBW Official</title>
+  <link rel="stylesheet" href="frontend.css" />
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="header-left">
+      <img src="images/logo.jpg" alt="PNBW Logo" class="logo" />
+      <h1>PNBW Official</h1>
+    </div>
+
+    <!-- Responsive hamburger for mobile -->
+    <div class="hamburger" id="hamburger-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Top navigation links -->
+    <nav class="top-nav" id="top-nav">
+      <a href="#home-section" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#services-section" class="nav-link">Services</a>
+      <a href="#intern-section" class="nav-link">Apply for Intern</a>
+      <span id="broker-nav-link" style="display:none;">
+        <a href="#broker-section" class="nav-link">Broker Dashboard</a>
+      </span>
+      <span id="admin-nav-link" style="display:none;">
+        <a href="#admin-section" class="nav-link">Admin Panel</a>
+      </span>
+    </nav>
+
+    <div class="user-area">
+      <span id="user-status"></span>
+      <button id="login-btn">Login</button>
+    </div>
+  </header>
+
+  <!-- ===== Side‐panel (Social Icons) ===== -->
+  <div id="side-panel" class="side-panel">
+    <a href="https://instagram.com/PNBWOfficial" target="_blank" aria-label="Instagram">
+      <img src="images/instagram.png" alt="Instagram" class="side-icon" />
+    </a>
+    <a href="https://linkedin.com/company/PNBWOfficial" target="_blank" aria-label="LinkedIn">
+      <img src="images/linkdin.png" alt="LinkedIn" class="side-icon" />
+    </a>
+    <a href="https://facebook.com/PNBWOfficial" target="_blank" aria-label="Facebook">
+      <img src="images/facebook.png" alt="Facebook" class="side-icon" />
+    </a>
+    <a href="mailto:support@pnbwofficial.com" aria-label="Gmail">
+      <img src="images/gmail.png" alt="Gmail" class="side-icon" />
+    </a>
+    <a href="https://github.com/PNBWOfficial" target="_blank" aria-label="GitHub">
+      <img src="images/github.png" alt="GitHub" class="side-icon" />
+    </a>
+  </div>
+
+  <!-- ===== Login Modal ===== -->
+  <div id="login-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" id="login-close">&times;</button>
+      <h2>Login / Register</h2>
+
+      <!-- Choose Phone or Email -->
+      <div id="login-choice">
+        <button class="choice-btn" id="choose-phone">Login with Phone</button>
+        <button class="choice-btn" id="choose-email">Login with Email</button>
+      </div>
+
+      <!-- Phone Form -->
+      <form id="phone-form" class="login-form" style="display: none;">
+        <label for="phone-input">Phone Number</label>
+        <input
+          type="tel"
+          id="phone-input"
+          name="phone"
+          placeholder="Enter your 10-digit phone"
+          required
+          maxlength="10"
+        />
+        <button type="button" id="send-otp-phone-btn">Send OTP</button>
+      </form>
+
+      <!-- Email Form -->
+      <form id="email-form" class="login-form" style="display: none;">
+        <label for="email-input">Email Address</label>
+        <input
+          type="email"
+          id="email-input"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <button type="button" id="send-otp-email-btn">Send OTP</button>
+      </form>
+
+      <!-- OTP Form (shared for both phone and email) -->
+      <form id="otp-form" class="login-form" style="display: none;">
+        <label for="otp-input">Enter OTP</label>
+        <input
+          type="text"
+          id="otp-input"
+          name="otp"
+          placeholder="Enter the 4-6 digit OTP"
+          required
+          maxlength="6"
+        />
+        <button type="button" id="verify-otp-btn">Verify & Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Property Detail Modal ===== -->
+  <div id="property-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content property-content">
+      <button class="modal-close" id="property-close">&times;</button>
+      <div id="property-slider" class="property-slider"></div>
+      <div class="property-info">
+        <h2 id="property-title"></h2>
+        <p id="property-status" class="status-badge"></p>
+        <p id="property-price" class="price-text"></p>
+        <p id="property-rating" class="stars"></p>
+        <p id="property-description"></p>
+      </div>
+      <form id="enquiry-form" class="enquiry-form">
+        <h3>Enquire for this property</h3>
+        <label for="enquiry-message">Your Message:</label>
+        <textarea id="enquiry-message" rows="3" placeholder="Type your message..." required></textarea>
+        <button type="button" id="submit-enquiry-btn">Submit Enquiry</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Main Content ===== -->
+  <main>
+    <!-- Home / Property Listing Section -->
+    <section id="home-section" class="home-section">
+      <div class="search-bar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by title or status (e.g., 'Goa' or 'Ready to Move')..."
+        />
+        <button id="clear-search-btn">×</button>
+      </div>
+      <section id="properties" class="grid"></section>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="info-section">
+      <h2>About PNBW Official</h2>
+      <p>
+        PNBW Official (PixieNest BuildWell) is a premier real‐estate brokerage offering plots, 
+        houses, and commercial land across India’s most sought‐after regions. With a growing 
+        network of brokers, we provide seamless property transactions, transparent pricing, 
+        and referral bonuses to reward our partners. Our mission is to boost property sales, 
+        expand our membership community, and enhance enquiry rates through exceptional service 
+        and an intuitive platform.
+      </p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services-section" class="info-section">
+      <h2>Our Services</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <h3>Property Listings</h3>
+          <p>Browse a wide range of residential and commercial properties across all major regions of India.</p>
+        </div>
+        <div class="service-card">
+          <h3>Broker Support</h3>
+          <p>Join our broker network, get a unique referral code, and earn commission & bonus on every successful lead.</p>
+        </div>
+        <div class="service-card">
+          <h3>Enquiry Management</h3>
+          <p>Instantly register your interest on any property and get connected to a dedicated broker for personalized assistance.</p>
+        </div>
+        <div class="service-card">
+          <h3>Legal & Documentation</h3>
+          <p>Get expert guidance on property verification, legal paperwork, and hassle‐free transaction processes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apply for Intern Section -->
+    <section id="intern-section" class="info-section">
+      <h2>Apply for Intern</h2>
+      <p>We’re always looking for motivated interns to join the PNBW family. Fill out the form below and our HR team will reach out if there’s a match.</p>
+      <form id="intern-form" class="intern-form">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+        <label for="email-intern">Email Address:</label>
+        <input type="email" id="email-intern" name="email" placeholder="Your email" required />
+
+        <label for="phone-intern">Phone Number:</label>
+        <input type="tel" id="phone-intern" name="phone" placeholder="Your phone number" required />
+
+        <label for="resume">Resume (PDF):</label>
+        <input type="file" id="resume" name="resume" accept=".pdf" required />
+
+        <button type="submit" class="primary-btn">Submit Application</button>
+      </form>
+    </section>
+
+    <!-- Broker Dashboard Section (hidden by default) -->
+    <section id="broker-section" class="dashboard" style="display:none;">
+      <h2>Broker Dashboard</h2>
+      <div id="broker-info" class="broker-info">
+        <p>Your Referral Code: <span id="ref-code"></span></p>
+        <p>Leads Referred: <span id="leads-count"></span></p>
+        <p>Total Commission Earned: ₹<span id="commission-amt"></span></p>
+      </div>
+      <h3>Your Listed Properties</h3>
+      <ul id="broker-properties" class="broker-properties"></ul>
+    </section>
+
+    <!-- Admin Panel Section (hidden by default) -->
+    <section id="admin-section" class="dashboard" style="display:none;">
+      <h2>Admin Panel</h2>
+      <div class="tabs">
+        <button class="tab-btn active" data-target="leads-tab">Leads Tracking</button>
+        <button class="tab-btn" data-target="comm-tab">Commission Dashboard</button>
+        <button class="tab-btn" data-target="user-tab">User & Broker Management</button>
+      </div>
+      <div class="tab-content">
+        <div id="leads-tab" class="tab-pane" style="display:block;">
+          <h3>Leads Tracking</h3>
+          <table>
+            <thead>
+              <tr><th>Broker</th><th>Referral Code</th><th>Leads Generated</th></tr>
+            </thead>
+            <tbody id="leads-table"></tbody>
+          </table>
+        </div>
+        <div id="comm-tab" class="tab-pane">
+          <h3>Commission Dashboard</h3>
+          <table>
+            <thead>
+              <tr><th>Broker</th><th>Commission Earned (₹)</th><th>Bonus Earned (₹)</th></tr>
+            </thead>
+            <tbody id="comm-table"></tbody>
+          </table>
+        </div>
+        <div id="user-tab" class="tab-pane">
+          <h3>User & Broker Management</h3>
+          <table>
+            <thead>
+              <tr><th>Phone/Email</th><th>Role</th><th>Status</th></tr>
+            </thead>
+            <tbody id="user-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>&copy; 2025 PNBW Official. All rights reserved.</p>
+  </footer>
+
+  <script src="frontend.js"></script>
+</body>
+</html>
