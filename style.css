@@ -1,0 +1,379 @@
+/* ============================== */
+/*  Base / Reset (you may already have your own) */
+/* ============================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #770303;       /* Dark red background */
+  color: #f0f0f0;            /* Light text color */
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ============================== */
+/*  Header / Navigation */
+/* ============================== */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #0707072d;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5)
+}
+
+.top-nav a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+.top-nav a:hover {
+  color: #ffcc00;
+  transform: translateY(-2px)
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+}
+
+#user-status {
+  margin-right: 12px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+#login-btn {
+  padding: 6px 14px;
+  background-color: #a80000;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+#login-btn:hover {
+  background-color: #8f0000;
+}
+
+/* ============================== */
+/*  Side Panel (Social icons) */
+/* ============================== */
+
+.side-panel {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  z-index: 40;
+}
+
+.side-icon {
+  width: 32px;
+  height: 32px;
+  margin: 8px 4px;
+  cursor: pointer;
+}
+
+/* ============================== */
+/*  Grid of Property Cards */
+/* ============================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 24px;
+}
+
+.card {
+  position: relative;          /* so badge can be absolute */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;            /* clip children */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Status badge over the top-left of each card */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 8px;
+  color: white;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+/* Image slider container: horizontal scroll */
+.image-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  max-height: 180px;
+}
+
+.slider-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* Hide scrollbar in most browsers */
+.image-slider::-webkit-scrollbar {
+  display: none;
+}
+.image-slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Card content section */
+.card-content {
+  padding: 12px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.stars {
+  color: #ffcc00;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.card-content p {
+  margin-bottom: 8px;
+}
+
+.card-content button {
+  align-self: flex-start;
+  padding: 6px 12px;
+  background-color: #a80000;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.card-content button:hover {
+  background-color: #8f0000;
+}
+
+/* ============================== */
+/*  Sections (About, Services, Intern) */
+/* ============================== */
+
+section {
+  padding: 32px 24px;
+  background-color: #fff;
+  margin-bottom: 16px;
+}
+
+#services-section .service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  background-color: #f1f1f1;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.intern form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 12px;
+}
+
+.intern input,
+.intern button {
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.intern button {
+  background-color: #a80000;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.intern button:hover {
+  background-color: #8f0000;
+}
+
+/* ============================== */
+/*  Broker / Admin Dashboards */
+/* ============================== */
+
+.dashboard {
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 24px;
+}
+
+/* Tab buttons */
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  background-color: #ddd;
+}
+
+.tab-btn.active {
+  background-color: #a80000;
+  color: white;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tab-pane th,
+.tab-pane td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+/* ============================== */
+/*  Modal Overlay (shared by login & property modals) */
+/* ============================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* ============================== */
+/*  Property Details Content */
+/* ============================== */
+
+.property-content h2 {
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+.property-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.property-slider img {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.property-info {
+  margin-bottom: 12px;
+}
+
+.property-info p {
+  margin: 6px 0;
+}
+
+.property-info .stars {
+  color: #ffcc00;
+}
+
+/* When modal is hidden, we use display:none (inline in HTML). */

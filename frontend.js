@@ -11,8 +11,7 @@ const properties = [
     images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
     status: 'Ready to Move',
     rating: 4,
-    description: 'A beautiful villa overlooking the Arabian Sea. 3 BHK, 2 baths, private garden.'
-    
+    description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
   },
   {
     id: 2,
@@ -21,16 +20,16 @@ const properties = [
     images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
     status: 'Under Construction',
     rating: 3,
-    description: 'Seaside plot in Kerala. Ideal for building your dream home. 200 sq. yards.'
+    description: 'A riverside plot in Kerala, perfect for building a dream home surrounded by nature.'
   },
   {
     id: 3,
     title: 'Skyline Apartment, Mumbai',
     price: 6200000,
-    images: ['download.jpg', 'mumbai2.jpg', 'mumbai3.jpg'],
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
     status: 'Resale',
     rating: 5,
-    description: 'Luxury 2 BHK apartment in the heart of Mumbai, with panoramic city views.'
+    description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
   },
   {
     id: 4,
@@ -39,7 +38,7 @@ const properties = [
     images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
     status: 'Ready to Move',
     rating: 2,
-    description: '50 acres of fertile farmland, perfect for commercial agriculture.'
+    description: 'Sprawling farm land in Punjab, ideal for agricultural or residential development.'
   },
   {
     id: 5,
@@ -48,7 +47,7 @@ const properties = [
     images: ['himachal.jpg', 'himachal2.jpg', 'himachal3.jpg'],
     status: 'Under Construction',
     rating: 3,
-    description: 'Charming cottage under construction with Himalayan views. 2 BHK, balcony.'
+    description: 'Cozy cottage atop a hill in Himachal Pradesh, with panoramic mountain views and cool breezes.'
   },
   {
     id: 6,
@@ -57,24 +56,29 @@ const properties = [
     images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
     status: 'Resale',
     rating: 4,
-    description: 'Plot in the Thar Desert, near Jaisalmer. Ideal for a desert resort project.'
+    description: 'Unique desert plot in Rajasthan with easy access to historical sites and tourist attractions.'
   }
 ];
 
+// 1b. Brokers & Users
 const brokers = [
   { phone: '9999990001', refCode: 'BRK001', leads: 5, commission: 50000, bonus: 10000, properties: [1, 3] },
-  { phone: '9999990002', refCode: 'BRK002', leads: 2, commission: 20000, bonus: 4000,  properties: [2, 4] },
-  { phone: '9999990003', refCode: 'BRK003', leads: 0, commission: 0,     bonus: 0,     properties: [5] }
+  { phone: '9999990002', refCode: 'BRK002', leads: 2, commission: 20000, bonus: 4000, properties: [2, 4] },
+  { phone: '9999990003', refCode: 'BRK003', leads: 0, commission: 0, bonus: 0, properties: [5] }
 ];
 
 const users = [
-  { phone: '0000000000', email: 'admin@gmail.com', role: 'admin',   status: 'active' },
-  { phone: '9999990001', role: 'broker',  status: 'active' },
-  { phone: '9999990002', role: 'broker',  status: 'active' },
-  { phone: '9999990003', role: 'broker',  status: 'disabled' },
-  { phone: '8888880004', role: 'customer',status: 'active' }
+  { identifier: '0000000000', type: 'phone', role: 'admin', status: 'active' },
+  { identifier: '9999990001', type: 'phone', role: 'broker', status: 'active' },
+  { identifier: '9999990002', type: 'phone', role: 'broker', status: 'active' },
+  { identifier: '9999990003', type: 'phone', role: 'broker', status: 'disabled' },
+  { identifier: '8888880004', type: 'phone', role: 'customer', status: 'active' },
+  { identifier: 'admin@example.com', type: 'email', role: 'admin', status: 'active' },
+  { identifier: 'broker1@example.com', type: 'email', role: 'broker', status: 'active' },
+  { identifier: 'customer@example.com', type: 'email', role: 'customer', status: 'active' }
 ];
 
+// Track current user (identifier = phone or email)
 let currentUser = localStorage.getItem('pnbw_user') || null;
 let currentRole = null;
 
@@ -82,130 +86,117 @@ let currentRole = null;
 // 2. DOMContentLoaded SETUP
 // ==============================
 document.addEventListener('DOMContentLoaded', () => {
+  setupHamburgerMenu();
   setupSidePanel();
   setupNavigation();
   renderUserStatus();
-  renderProperties();
+  renderProperties(properties);
   attachEventListeners();
 });
 
 // ==============================
-// 3. SIDE PANEL (SOCIAL ICONS)
+// 3. HAMBURGER MENU FOR MOBILE
 // ==============================
-function setupSidePanel() {
-  const sidePanel = document.getElementById('side-panel');
-  sidePanel.className = 'side-panel';
-
-  const socials = [
-    { href: 'https://instagram.com/PNBWOfficial', imgSrc: 'images/ig.png', alt: 'Instagram' },
-    { href: 'https://linkedin.com/company/PNBWOfficial', imgSrc: 'images/linkdin.png', alt: 'LinkedIn' },
-    { href: 'https://www.facebook.com/profile.php?id=61576669505023&mibextid=ZbWKwL', imgSrc: 'images/facebook.png', alt: 'Facebook' },
-    { href: 'mailto:support@pnbwofficial.com', imgSrc: 'images/gmail.png', alt: 'Gmail' },
-    { href: 'https://github.com/PNBWOfficial', imgSrc: 'images/github.png', alt: 'GitHub' }
-  ];
-
-  socials.forEach(s => {
-    const a = document.createElement('a');
-    a.href = s.href;
-    a.target = '_blank';
-    a.setAttribute('aria-label', s.alt);
-
-    const img = document.createElement('img');
-    img.src = s.imgSrc;
-    img.alt = s.alt;
-    img.className = 'side-icon';
-
-    a.appendChild(img);
-    sidePanel.appendChild(a);
-  });
-}
-
-// ==============================
-// 4. NAVIGATION & EVENT LISTENERS
-// ==============================
-function attachEventListeners() {
-  // Login modal
-  document.getElementById('login-btn').addEventListener('click', onLoginButtonClick);
-  document.getElementById('login-close').addEventListener('click', closeLoginModal);
-  document.getElementById('login-modal').addEventListener('click', onModalClickOutside);
-  document.getElementById('send-otp-btn').addEventListener('click', onSendOtp);
-  document.getElementById('verify-otp-btn').addEventListener('click', onVerifyOtp);
-
-  // Property details modal close
-  document.getElementById('property-close').addEventListener('click', closePropertyModal);
-  document.getElementById('property-modal').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('property-modal')) {
-      closePropertyModal();
+function setupHamburgerMenu() {
+  const hamburger = document.getElementById('hamburger-btn');
+  const topNav = document.getElementById('top-nav');
+  hamburger.addEventListener('click', () => {
+    if (topNav.style.display === 'flex') {
+      topNav.style.display = 'none';
+    } else {
+      topNav.style.display = 'flex';
+      topNav.style.flexDirection = 'column';
     }
   });
-
-  // Navigation buttons (once logged in)
-  document.getElementById('home-btn')?.addEventListener('click', showHome);
-  document.getElementById('broker-btn')?.addEventListener('click', showBrokerDashboard);
-  document.getElementById('admin-btn')?.addEventListener('click', showAdminPanel);
 }
 
+// ==============================
+// 4. SIDE PANEL (SOCIAL ICONS)
+// ==============================
+function setupSidePanel() {
+  // Already statically in HTML; nothing dynamic needed here.
+}
+
+// ==============================
+// 5. NAVIGATION & ROLE CHECK
+// ==============================
 function setupNavigation() {
   if (currentUser) {
-    const usr = users.find(u => u.phone === currentUser);
+    // Determine role
+    const usr = users.find(u => u.identifier === currentUser);
     currentRole = usr ? usr.role : 'customer';
     updateNavByRole();
   }
 }
 
 function updateNavByRole() {
-  const brokerBtn = document.getElementById('broker-btn');
-  const adminBtn  = document.getElementById('admin-btn');
-
-  if (brokerBtn) brokerBtn.style.display = 'none';
-  if (adminBtn)  adminBtn.style.display = 'none';
+  const brokerLink = document.getElementById('broker-nav-link');
+  const adminLink  = document.getElementById('admin-nav-link');
 
   if (currentRole === 'broker') {
-    brokerBtn?.style.setProperty('display', 'inline-block');
+    brokerLink.style.display = 'inline-block';
+    adminLink.style.display = 'none';
   } else if (currentRole === 'admin') {
-    adminBtn?.style.setProperty('display', 'inline-block');
+    adminLink.style.display = 'inline-block';
+    brokerLink.style.display = 'none';
+  } else {
+    brokerLink.style.display = 'none';
+    adminLink.style.display = 'none';
   }
 }
 
-function showHome() {
-  document.getElementById('home-section').style.display   = 'block';
-  document.getElementById('broker-section').style.display = 'none';
-  document.getElementById('admin-section').style.display  = 'none';
-}
-
-function showBrokerDashboard() {
-  document.getElementById('home-section').style.display   = 'none';
-  document.getElementById('broker-section').style.display = 'block';
-  document.getElementById('admin-section').style.display  = 'none';
-  renderBrokerDashboard();
-}
-
-function showAdminPanel() {
-  document.getElementById('home-section').style.display   = 'none';
-  document.getElementById('broker-section').style.display = 'none';
-  document.getElementById('admin-section').style.display  = 'block';
-  renderAdminTabs();
-  switchTab('leads-tab');
-}
-
 // ==============================
-// 5. LOGIN MODAL LOGIC
+// 6. LOGIN MODAL LOGIC
 // ==============================
 const loginModal    = document.getElementById('login-modal');
-const phoneForm     = document.getElementById('contact-form');
-const phoneInput    = document.getElementById('contact-input');
+const loginChoice   = document.getElementById('login-choice');
+const phoneForm     = document.getElementById('phone-form');
+const emailForm     = document.getElementById('email-form');
 const otpForm       = document.getElementById('otp-form');
-const otpInput      = document.getElementById('otp-input');
 
+function attachEventListeners() {
+  // Login‐related
+  document.getElementById('login-btn').addEventListener('click', onLoginButtonClick);
+  document.getElementById('login-close').addEventListener('click', closeLoginModal);
+  document.getElementById('login-modal').addEventListener('click', onLoginModalClickOutside);
+  document.getElementById('choose-phone').addEventListener('click', showPhoneForm);
+  document.getElementById('choose-email').addEventListener('click', showEmailForm);
+  document.getElementById('send-otp-phone-btn').addEventListener('click', onSendOtpPhone);
+  document.getElementById('send-otp-email-btn').addEventListener('click', onSendOtpEmail);
+  document.getElementById('verify-otp-btn').addEventListener('click', onVerifyOtp);
+
+  // Search‐Filter
+  document.getElementById('search-input').addEventListener('input', onSearchInput);
+  document.getElementById('clear-search-btn').addEventListener('click', clearSearch);
+
+  // Property modal close
+  document.getElementById('property-close').addEventListener('click', closePropertyModal);
+  document.getElementById('property-modal').addEventListener('click', onPropertyModalClickOutside);
+
+  // Admin tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.target));
+  });
+
+  // Intern form submission (dummy)
+  document.getElementById('intern-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Intern application submitted! Our HR will contact you soon.');
+    e.target.reset();
+  });
+}
+
+// LOGIN BUTTON CLICK
 function onLoginButtonClick(e) {
   e.preventDefault();
   if (currentUser) {
+    // Logout
     localStorage.removeItem('pnbw_user');
     currentUser = null;
     currentRole = null;
     updateNavByRole();
-    showHome();
     renderUserStatus();
+    showSection('home-section');
   } else {
     openLoginModal();
   }
@@ -213,63 +204,108 @@ function onLoginButtonClick(e) {
 
 function openLoginModal() {
   loginModal.style.display = 'flex';
-  contactForm.style.display = 'flex';
-  otpForm.style.display   = 'none';
-  contactInput.value        = '';
-  otpInput.value          = '';
+  loginChoice.style.display = 'flex';
+  phoneForm.style.display = 'none';
+  emailForm.style.display = 'none';
+  otpForm.style.display = 'none';
+  document.getElementById('phone-input').value = '';
+  document.getElementById('email-input').value = '';
+  document.getElementById('otp-input').value = '';
 }
 
 function closeLoginModal() {
   loginModal.style.display = 'none';
 }
 
-function onModalClickOutside(evt) {
+function onLoginModalClickOutside(evt) {
   if (evt.target === loginModal) {
     closeLoginModal();
   }
 }
-function onSendOtp() {
-  const contactVal = contactInput.value.trim();
 
-  // Basic pattern checks
-  const phonePattern = /^[0-9]{10}$/;
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function showPhoneForm() {
+  loginChoice.style.display = 'none';
+  phoneForm.style.display = 'flex';
+  emailForm.style.display = 'none';
+  otpForm.style.display = 'none';
+}
 
-  if (!phonePattern.test(contactVal) && !emailPattern.test(contactVal)) {
-    alert('Please enter a valid 10-digit phone OR a valid email address.');
+function showEmailForm() {
+  loginChoice.style.display = 'none';
+  phoneForm.style.display = 'none';
+  emailForm.style.display = 'flex';
+  otpForm.style.display = 'none';
+}
+
+let loginMethod = null; // 'phone' or 'email'
+function onSendOtpPhone() {
+  const phoneVal = document.getElementById('phone-input').value.trim();
+  if (!/^[0-9]{10}$/.test(phoneVal)) {
+    alert('Please enter a valid 10-digit phone number.');
     return;
   }
-
+  loginMethod = 'phone';
   setTimeout(() => {
-    contactForm.style.display = 'none';
-    otpForm.style.display     = 'flex';
-    alert(`OTP has been sent to ${contactVal}. (Simulated)`);
-  }, 500);
+    phoneForm.style.display = 'none';
+    otpForm.style.display = 'flex';
+    alert(`OTP has been sent to ${phoneVal}. (Simulated code: 1234)`);
+  }, 300);
+}
+
+function onSendOtpEmail() {
+  const emailVal = document.getElementById('email-input').value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  loginMethod = 'email';
+  setTimeout(() => {
+    emailForm.style.display = 'none';
+    otpForm.style.display = 'flex';
+    alert(`OTP has been sent to ${emailVal}. (Simulated code: 1234)`);
+  }, 300);
 }
 
 function onVerifyOtp() {
-  const otpVal = otpInput.value.trim();
+  const otpVal = document.getElementById('otp-input').value.trim();
   if (!/^[0-9]{4,6}$/.test(otpVal)) {
-    alert('Please enter a valid OTP.');
+    alert('Please enter a valid 4-6 digit OTP.');
+    return;
+  }
+  // Simulate checking OTP: always accept "1234"
+  if (otpVal !== '1234') {
+    alert('Incorrect OTP. Try 1234 for simulation.');
     return;
   }
 
-  const contactVal = contactInput.value.trim();
-  currentUser = contactVal;                      // could be phone or email
-  localStorage.setItem('pnbw_user', currentUser);
+  // Determine identifier
+  let identifier;
+  if (loginMethod === 'phone') {
+    identifier = document.getElementById('phone-input').value.trim();
+  } else {
+    identifier = document.getElementById('email-input').value.trim();
+  }
 
-  const usr = users.find(u => u.phone === currentUser || u.email === currentUser);
-  currentRole = usr ? usr.rolae : 'customer';
+  // Check if user exists and is active
+  const usr = users.find(u => u.identifier === identifier);
+  if (!usr || usr.status !== 'active') {
+    alert('No active account found for this identifier.');
+    return;
+  }
+
+  currentUser = identifier;
+  localStorage.setItem('pnbw_user', currentUser);
+  currentRole = usr.role;
 
   alert('Logged in successfully!');
   closeLoginModal();
   updateNavByRole();
-  showHome();
   renderUserStatus();
+  showSection('home-section');
 }
 
 // ==============================
-// 6. HEADER LOGIN STATUS
+// 7. HEADER LOGIN STATUS
 // ==============================
 function renderUserStatus() {
   const statusEl = document.getElementById('user-status');
@@ -285,140 +321,171 @@ function renderUserStatus() {
 }
 
 // ==============================
-// 7. PROPERTY RENDERING (MULTIPLE IMAGES & STATUS BADGE)
+// 8. SEARCH & FILTER PROPERTIES
 // ==============================
-function renderProperties() {
+function onSearchInput(e) {
+  const query = e.target.value.trim().toLowerCase();
+  if (!query) {
+    renderProperties(properties);
+    return;
+  }
+  const filtered = properties.filter(p => {
+    return (
+      p.title.toLowerCase().includes(query) || 
+      p.status.toLowerCase().includes(query)
+    );
+  });
+  renderProperties(filtered);
+}
+
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  renderProperties(properties);
+}
+
+// ==============================
+// 9. PROPERTY GRID RENDERING
+// ==============================
+function renderProperties(list) {
   const container = document.getElementById('properties');
   container.innerHTML = '';
 
-  properties.forEach((p) => {
+  list.forEach((p) => {
+    // Create card element
     const card = document.createElement('div');
-    card.className = 'card';  // position: relative
+    card.className = 'card';
+    card.dataset.status = p.status; // for CSS badge color
 
-    // 1) Status badge
-    const badgeSpan = document.createElement('span');
-    badgeSpan.className = 'status-badge';
-    let badgeColor = '#ffcc00';
-    if (p.status === 'Resale') badgeColor = '#f63a3a';
-    if (p.status === 'Under Construction') badgeColor = '#ff99c9';
-    badgeSpan.style.background = badgeColor;
-    badgeSpan.textContent = p.status;
-    card.appendChild(badgeSpan);
+    // Badge color is managed by CSS data-attribute selectors
 
-    // 2) Image slider container
+    // Create image-slider
     const sliderDiv = document.createElement('div');
     sliderDiv.className = 'image-slider';
-    p.images.forEach(imgName => {
-      const imgEl = document.createElement('img');
-      imgEl.src = `images/${imgName}`;
-      imgEl.alt = p.title;
-      imgEl.className = 'slider-image';
-      sliderDiv.appendChild(imgEl);
+    p.images.forEach(imgFile => {
+      const img = document.createElement('img');
+      img.src = `images/${imgFile}`;
+      img.alt = p.title;
+      sliderDiv.appendChild(img);
     });
-    card.appendChild(sliderDiv);
 
-    // 3) Card content
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'card-content';
+    // Star rating
     let stars = '';
     for (let i = 1; i <= 5; i++) {
       stars += i <= p.rating ? '★' : '☆';
     }
-    contentDiv.innerHTML = `
+
+    // Card content
+    const cardContent = document.createElement('div');
+    cardContent.className = 'card-content';
+    cardContent.innerHTML = `
+      <span class="status-badge">${p.status}</span>
       <h3>${p.title}</h3>
       <p class="stars">${stars}</p>
       <p>₹${p.price.toLocaleString()}</p>
-      <button onclick="enquire(${p.id})">Enquire</button>
+      <button class="enquire-btn" data-id="${p.id}">Enquire</button>
     `;
-    card.appendChild(contentDiv);
 
+    // Append slider + content
+    card.appendChild(sliderDiv);
+    card.appendChild(cardContent);
     container.appendChild(card);
   });
+
+  // Attach event listeners to new Enquire buttons
+  document.querySelectorAll('.enquire-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const pid = parseInt(e.target.dataset.id, 10);
+      openPropertyModal(pid);
+    });
+  });
 }
 
 // ==============================
-// 8. ENQUIRE → PROPERTY DETAILS MODAL
+// 10. PROPERTY DETAIL MODAL LOGIC
 // ==============================
 const propertyModal = document.getElementById('property-modal');
-const propertyClose = document.getElementById('property-close');
-const propertyContainer = document.getElementById('property-details-container');
 
-function enquire(id) {
+function openPropertyModal(propertyId) {
+  // Find property
+  const prop = properties.find(p => p.id === propertyId);
+  if (!prop) return;
+
+  // Check login
   if (!currentUser) {
-    alert('Please log in to view property details.');
+    alert('Please log in to view property details and enquire.');
     return;
   }
-  const property = properties.find(p => p.id === id);
-  if (!property) return;
 
-  openPropertyModal(property);
-}
-
-function openPropertyModal(property) {
-  // Clear previous content
-  propertyContainer.innerHTML = '';
-
-  // Title
-  const titleEl = document.createElement('h2');
-  titleEl.textContent = property.title;
-  propertyContainer.appendChild(titleEl);
-
-  // Image slider for details
-  const sliderDiv = document.createElement('div');
-  sliderDiv.className = 'property-slider';
-  property.images.forEach(imgName => {
-    const imgEl = document.createElement('img');
-    imgEl.src = `images/${imgName}`;
-    imgEl.alt = property.title;
-    sliderDiv.appendChild(imgEl);
+  // Populate slider
+  const sliderDiv = document.getElementById('property-slider');
+  sliderDiv.innerHTML = '';
+  prop.images.forEach(imgFile => {
+    const img = document.createElement('img');
+    img.src = `images/${imgFile}`;
+    img.alt = prop.title;
+    sliderDiv.appendChild(img);
   });
-  propertyContainer.appendChild(sliderDiv);
 
-  // Property info block
-  const infoDiv = document.createElement('div');
-  infoDiv.className = 'property-info';
+  // Populate details
+  document.getElementById('property-title').textContent = prop.title;
+  document.getElementById('property-status').textContent = prop.status;
 
-  // Status & badge
-  let badgeColor = '#ffcc00';
-  if (property.status === 'Resale') badgeColor = '#f63a3a';
-  if (property.status === 'Under Construction') badgeColor = '#ff99c9';
+  // Assign badge color class (reuse card data-status)
+  const statusEl = document.getElementById('property-status');
+  statusEl.className = 'status-badge';
+  if (prop.status === 'Ready to Move') statusEl.style.backgroundColor = 'var(--badge-ready)';
+  if (prop.status === 'Resale') statusEl.style.backgroundColor = 'var(--badge-resale)';
+  if (prop.status === 'Under Construction') statusEl.style.backgroundColor = 'var(--badge-construction)';
 
-  infoDiv.innerHTML = `
-    <p><strong>Status:</strong> <span style="color:${badgeColor}; font-weight:600;">${property.status}</span></p>
-    <p><strong>Price:</strong> ₹${property.price.toLocaleString()}</p>
-    <p class="stars"><strong>Rating:</strong> ${'★'.repeat(property.rating) + '☆'.repeat(5 - property.rating)}</p>
-    <p><strong>Description:</strong> ${property.description}</p>
-  `;
-  propertyContainer.appendChild(infoDiv);
+  document.getElementById('property-price').textContent = `₹${prop.price.toLocaleString()}`;
+  let stars = '';
+  for (let i = 1; i <= 5; i++) {
+    stars += i <= prop.rating ? '★' : '☆';
+  }
+  document.getElementById('property-rating').textContent = stars;
+  document.getElementById('property-description').textContent = prop.description || '';
 
-  // “Confirm Enquiry” button
-  const confirmBtn = document.createElement('button');
-  confirmBtn.textContent = 'Confirm Enquiry';
-  confirmBtn.style.marginTop = '12px';
-  confirmBtn.onclick = () => {
-    alert(`Enquiry confirmed for "${property.title}" by ${currentUser}.`);
+  // Show modal
+  propertyModal.style.display = 'flex';
+
+  // When user submits enquiry
+  document.getElementById('enquiry-form').onsubmit = (e) => {
+    e.preventDefault();
+  };
+  document.getElementById('submit-enquiry-btn').onclick = () => {
+    const msg = document.getElementById('enquiry-message').value.trim();
+    if (!msg) {
+      alert('Please type your enquiry message.');
+      return;
+    }
+    // Simulate storing enquiry (in a real app, send to backend)
+    alert(`Enquiry for "${prop.title}" submitted!\nMessage: ${msg}`);
+    document.getElementById('enquiry-message').value = '';
     closePropertyModal();
   };
-  propertyContainer.appendChild(confirmBtn);
-
-  // Show the modal
-  propertyModal.style.display = 'flex';
 }
 
 function closePropertyModal() {
   propertyModal.style.display = 'none';
-  propertyContainer.innerHTML = '';
+}
+
+function onPropertyModalClickOutside(evt) {
+  if (evt.target === propertyModal) {
+    closePropertyModal();
+  }
 }
 
 // ==============================
-// 9. BROKER DASHBOARD RENDERING
+// 11. BROKER DASHBOARD RENDERING
 // ==============================
 function renderBrokerDashboard() {
-  const brokerData = brokers.find(b => b.phone === currentUser);
+  if (!currentUser || currentRole !== 'broker') return;
+
+  const brokerData = brokers.find(b => b.phone === currentUser || b.email === currentUser);
   if (!brokerData) return;
 
-  document.getElementById('ref-code').textContent       = brokerData.refCode;
-  document.getElementById('leads-count').textContent    = brokerData.leads;
+  document.getElementById('ref-code').textContent      = brokerData.refCode;
+  document.getElementById('leads-count').textContent   = brokerData.leads;
   document.getElementById('commission-amt').textContent = brokerData.commission + brokerData.bonus;
 
   const propListEl = document.getElementById('broker-properties');
@@ -434,7 +501,7 @@ function renderBrokerDashboard() {
 }
 
 // ==============================
-// 10. ADMIN PANEL RENDERING
+// 12. ADMIN PANEL RENDERING
 // ==============================
 function renderAdminTabs() {
   // Leads Tracking
@@ -460,17 +527,61 @@ function renderAdminTabs() {
   userTbody.innerHTML = '';
   users.forEach(u => {
     const row = document.createElement('tr');
-    row.innerHTML = `<td>${u.phone}</td><td>${u.role}</td><td>${u.status}</td>`;
+    row.innerHTML = `<td>${u.identifier}</td><td>${u.role}</td><td>${u.status}</td>`;
     userTbody.appendChild(row);
-  });
-
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.target));
   });
 }
 
 function switchTab(targetId) {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    if (btn.dataset.target === targetId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
   document.querySelectorAll('.tab-pane').forEach(pane => {
     pane.style.display = (pane.id === targetId ? 'block' : 'none');
   });
 }
+
+// ==============================
+// 13. SECTION NAVIGATION HELPER
+// ==============================
+function showSection(sectionId) {
+  // Hide all main sections
+  document.querySelectorAll('main > section').forEach(sec => {
+    sec.style.display = 'none';
+  });
+  // Show the requested section
+  const target = document.getElementById(sectionId);
+  if (target) target.style.display = 'block';
+
+  // If showing broker or admin, also render content
+  if (sectionId === 'broker-section') {
+    renderBrokerDashboard();
+  }
+  if (sectionId === 'admin-section') {
+    renderAdminTabs();
+  }
+}
+
+// When nav links clicked, show/hide sections
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const secId = href.substring(1);
+      showSection(secId);
+      // Close mobile menu if open
+      const topNav = document.getElementById('top-nav');
+      if (window.innerWidth <= 768) {
+        topNav.style.display = 'none';
+      }
+    }
+  });
+});
+
+// By default, show Home on load
+showSection('home-section');
