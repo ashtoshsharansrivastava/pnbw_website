@@ -6,7 +6,61 @@
 const properties = [
   {
     id: 1,
-    title: 'Sunset Villa, Goa',
+    title: 'Chhapraula Haathipur kheda, Noida',
+    price: 9500000,
+    images: ['chaprolla3.jpg', 'chaprolla2.jpg', 'chaprolla1.jpg'],
+    status: 'Ready to Move',
+    rating: 4,
+    description: 'Near National Highway Road, Private Hospitals and Clinics.'
+  },
+  {
+    id: 2,
+    title: 'Kuri  kheda Badalpur, Noida',
+    price: 1800000,
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Under Construction',
+    rating: 3,
+    description: 'Near Rapid Metro Station,Near National Highway Road, Private Hospitals and Clinics..'
+  },
+  {
+    id: 3,
+    title: 'Dadri Bypass, Dhoom Manikpur',
+    price: 6200000,
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    status: 'Resale',
+    rating: 5,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 4,
+    title: 'Sainisunpura Tilpta, Noida',
+    price: 3000000,
+    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    status: 'Ready to Move',
+    rating: 2,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 5,
+    title: 'Bhikkanpur Duhai, Ghaziabad',
+    price: 4200000,
+    images: ['himachal.jpg', 'himachal2.jpg', 'himachal3.jpg'],
+    status: 'Under Construction',
+    rating: 3,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 6,
+    title: 'Navipur Sultanpur, Muradnagar',
+    price: 2500000,
+    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    status: 'Resale',
+    rating: 4,
+    description: 'Near Goverment Hospitals and Banks nearby.'
+  },
+  {
+    id: 7,
+    title: 'Morta Shahpur, Ghaziabad',
     price: 9500000,
     images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
     status: 'Ready to Move',
@@ -14,8 +68,62 @@ const properties = [
     description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
   },
   {
-    id: 2,
-    title: 'Oceanview Plot, Kerala',
+    id: 8,
+    title: 'Rajnagar Extension, Morti',
+    price: 1800000,
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Under Construction',
+    rating: 3,
+    description: 'A riverside plot in Kerala, perfect for building a dream home surrounded by nature.'
+  },
+  {
+    id: 9,
+    title: 'Mohiuddinpur, Modinagar ',
+    price: 6200000,
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    status: 'Resale',
+    rating: 5,
+    description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
+  },
+  {
+    id: 10,
+    title: 'Tranika City-Teela Village, Loni',
+    price: 3000000,
+    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    status: 'Ready to Move',
+    rating: 2,
+    description: 'Sprawling farm land in Punjab, ideal for agricultural or residential development.'
+  },
+  {
+    id: 11,
+    title: 'Jewar Tappal, Yamuna Expressway',
+    price: 4200000,
+    images: ['jewar4.jpg', 'jewar3.jpg', 'jevar2.jpg', 'jevar1.jpg'],
+    status: 'Under Construction',
+    rating: 3,
+    description: 'Near Goverment Hospitals and Banks nearby.'
+  },
+  {
+    id: 12,
+    title: 'Chhata Mathura, Vrindavan',
+    price: 2500000,
+    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    status: 'Resale',
+    rating: 4,
+    description: 'Unique desert plot in Rajasthan with easy access to historical sites and tourist attractions.'
+  },
+  {
+    id: 13,
+    title: 'Khatu Shyam Ji, Rajasthan',
+    price: 9500000,
+    images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
+    status: 'Ready to Move',
+    rating: 4,
+    description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
+  },
+  {
+    id: 14,
+    title: 'Shamili City, M.V Road',
     price: 1800000,
     images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
     status: 'Under Construction',
@@ -24,40 +132,15 @@ const properties = [
   },
   {
     id: 3,
-    title: 'Skyline Apartment, Mumbai',
+    title: 'Shree Ram Janm Bhumi, Ayodhya ',
     price: 6200000,
     images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
     status: 'Resale',
     rating: 5,
     description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
-  },
-  {
-    id: 4,
-    title: 'Green Fields Land, Punjab',
-    price: 3000000,
-    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
-    status: 'Ready to Move',
-    rating: 2,
-    description: 'Sprawling farm land in Punjab, ideal for agricultural or residential development.'
-  },
-  {
-    id: 5,
-    title: 'Hilltop Cottage, Himachal',
-    price: 4200000,
-    images: ['himachal.jpg', 'himachal2.jpg', 'himachal3.jpg'],
-    status: 'Under Construction',
-    rating: 3,
-    description: 'Cozy cottage atop a hill in Himachal Pradesh, with panoramic mountain views and cool breezes.'
-  },
-  {
-    id: 6,
-    title: 'Desert Oasis Plot, Rajasthan',
-    price: 2500000,
-    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
-    status: 'Resale',
-    rating: 4,
-    description: 'Unique desert plot in Rajasthan with easy access to historical sites and tourist attractions.'
   }
+  
+  
 ];
 
 // 1b. Brokers & Users
