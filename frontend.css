@@ -168,13 +168,13 @@ header h1 {
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 
   /* translucent grey background */
   background-color: rgba(128, 128, 128, 0.6);
 
   /* make it wider and add inner padding */
-  width: 80px;
+  width: 60px;
   padding: 12px 8px;
 
   /* curved on the right side */
