@@ -114,7 +114,7 @@ const properties = [
   },
   {
     id: 13,
-    title: 'Khatu Shyam Ji, Rajasthan',
+    title: 'Radhe Shyam Puri, Khyatu Shyam Rajasthan',
     price: 9500000,
     images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
     status: 'Ready to Move',
@@ -131,16 +131,266 @@ const properties = [
     description: 'A riverside plot in Kerala, perfect for building a dream home surrounded by nature.'
   },
   {
-    id: 3,
-    title: 'Shree Ram Janm Bhumi, Ayodhya ',
+    id: 15,
+    title: 'Shree Ram Janki Ayodhya Dham, Ayodhya ',
     price: 6200000,
     images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
     status: 'Resale',
     rating: 5,
     description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
-  }
-  
-  
+  },
+  {
+    id: 16,
+    title: 'Om Sai Vatika, Mohiuddinpur, Merrut',
+    price : 16000,
+    images: ['chaprolla3.jpg', 'chaprolla2.jpg', 'chaprolla1.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'Near National Highway Road, Private Hospitals and Clinics.'
+  },
+  {
+    id: 17,
+    title: 'Nath City, Jewar Sarol',
+    price : 26000,
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Fresh',
+    rating: 3,
+    description: 'Near Rapid Metro Station,Near National Highway Road, Private Hospitals and Clinics..'
+  },
+  {
+    id: 18,
+    title: ' Radha Krishn Enclave, Jewar Tappal',
+    price: 6200000,
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    status: 'Fresh',
+    rating: 5,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 19,
+    title: 'Radha Krishna kunj, Jewar',
+    price: 3000000,
+    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    status: 'Fresh',
+    rating: 2,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 20,
+    title: 'Radha Krishna Vatika, Jewar',
+    price: 4200000,
+    images: ['himachal.jpg', 'himachal2.jpg', 'himachal3.jpg'],
+    status: 'Fresh',
+    rating: 3,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 21,
+    title: 'Rekha Garden (III), Tronica City',
+    price: 2500000,
+    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'Near Goverment Hospitals and Banks nearby.'
+  },
+  {
+    id: 22,
+    title: 'Lakshmi Garden, Tila Village',
+    price: 9500000,
+    images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
+  },
+  {
+    id: 23,
+    title: 'HighTech City (I), (II), Saini Sunpura Ek murti , Noida',
+    price: 1800000,
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Resale',
+    rating: 3,
+    description: 'A riverside plot in Kerala, perfect for building a dream home surrounded by nature.'
+  },
+  {
+    id: 24,
+    title: 'Villa Society , Roja Jalalpur vedpura, Saini Sunpura ',
+    price: 6200000,
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    status: 'Fresh',
+    rating: 5,
+    description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
+  },
+  {
+    id: 25,
+    title: 'Villa Society, Chapraulla',
+    price: 3000000,
+    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    status: 'Fresh',
+    rating: 2,
+    description: 'Sprawling farm land in Punjab, ideal for agricultural or residential development.'
+  },
+  {
+    id: 26,
+    title: 'Royal Garden, Dadri Expressway',
+    price: 4200000,
+    images: ['jewar4.jpg', 'jewar3.jpg', 'jevar2.jpg', 'jevar1.jpg'],
+    status: 'Under Construction',
+    rating: 3,
+    description: 'Near Goverment Hospitals and Banks nearby.'
+  },
+  {
+    id: 28,
+    title: 'Keshav Residency, Dadri Tilpata bypass Amka',
+    price: 2500000,
+    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'Unique desert plot in Rajasthan with easy access to historical sites and tourist attractions.'
+  },
+  {
+    id: 29,
+    title: 'Shree Shyam Enclave, Rajnagar Extension (morti)',
+    price: 9500000,
+    images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
+  },
+  {
+    id: 30,
+    title: 'Vrindavan Garden, Duhai',
+    price: 1800000,
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Fresh',
+    rating: 3,
+    description: 'A riverside plot in Kerala, perfect for building a dream home surrounded by nature.'
+  },
+  {
+    id: 31,
+    title: 'Khyatu Shyam Extension, Duhai ',
+    price: 6200000,
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    status: 'Fresh',
+    rating: 5,
+    description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
+  },
+  {
+    id: 32,
+    title: 'Indraprastha City (II), Bhikkanpur',
+    price: 9500000,
+    images: ['chaprolla3.jpg', 'chaprolla2.jpg', 'chaprolla1.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'Near National Highway Road, Private Hospitals and Clinics.'
+  },
+  {
+    id: 33,
+    title: 'Indraprastha City (III), Shahpur',
+    price: 1800000,
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Fresh',
+    rating: 3,
+    description: 'Near Rapid Metro Station,Near National Highway Road, Private Hospitals and Clinics..'
+  },
+  {
+    id: 34,
+    title: 'Shashi Enclave, Bhikkanpur',
+    price: 6200000,
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    status: 'Resale',
+    rating: 5,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 35,
+    title: 'Khyatu Shyam Enclave, Morta',
+    price: 3000000,
+    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    status: 'Fresh',
+    rating: 2,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 36,
+    title: 'Khyatu Shyam City, Sultanpur',
+    price: 4200000,
+    images: ['himachal.jpg', 'himachal2.jpg', 'himachal3.jpg'],
+    status: 'Fresh',
+    rating: 3,
+    description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
+  },
+  {
+    id: 37,
+    title: 'Shree Govind Vatika, Vrindavan',
+    price: 2500000,
+    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'Near Goverment Hospitals and Banks nearby.'
+  },
+  {
+    id: 38,
+    title: 'Radha Krishna Brij Bhumi, Simro(Vrindavan)',
+    price: 9500000,
+    images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
+  },
+  {
+    id: 39,
+    title: 'Radha Krishna Vrindavan Puram , Vrindavan',
+    price: 1800000,
+    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    status: 'Fresh',
+    rating: 3,
+    description: 'A riverside plot in Kerala, perfect for building a dream home surrounded by nature.'
+  },
+  {
+    id: 40,
+    title: 'Radha Krishna Vihar , Vrindavan',
+    price: 6200000,
+    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    status: 'Resale',
+    rating: 5,
+    description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
+  },
+  {
+    id: 41,
+    title: 'Radha Krishna Dham, Vrindavan',
+    price: 3000000,
+    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    status: 'Fresh',
+    rating: 2,
+    description: 'Sprawling farm land in Punjab, ideal for agricultural or residential development.'
+  },
+  {
+    id: 42,
+    title: 'Radha Krishna Vrindavan Aashram, Vrindavan',
+    price: 4200000,
+    images: ['jewar4.jpg', 'jewar3.jpg', 'jevar2.jpg', 'jevar1.jpg'],
+    status: 'Fresh',
+    rating: 3,
+    description: 'Near Goverment Hospitals and Banks nearby.'
+  },
+  {
+    id: 43,
+    title: 'Chandroday City +4, Mathura Chata, Akbarpur',
+    price: 2500000,
+    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    status: 'Resale',
+    rating: 4,
+    description: 'Unique desert plot in Rajasthan with easy access to historical sites and tourist attractions.'
+  },
+  {
+    id: 44,
+    title: 'Radhe Awadhpuri, Ayodhya',
+    price: 9500000,
+    images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
+    status: 'Fresh',
+    rating: 4,
+    description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
+  }  
 ];
 
 // 1b. Brokers & Users
@@ -152,7 +402,7 @@ const brokers = [
 
 const users = [
   { identifier: '0000000000', type: 'phone', role: 'admin', status: 'active' },
-  { identifier: '9999990001', type: 'phone', role: 'broker', status: 'active' },
+  { identifier: '999990001', type: 'phone', role: 'broker', status: 'active' },
   { identifier: '9999990002', type: 'phone', role: 'broker', status: 'active' },
   { identifier: '9999990003', type: 'phone', role: 'broker', status: 'disabled' },
   { identifier: '8888880004', type: 'phone', role: 'customer', status: 'active' },
