@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import LoginModal from './components/LoginModal';
-import PropertyModal from './components/PropertyModal';
-import HomeSection from './components/HomeSection';
-import AboutSection from './components/AboutSection';
-import ServicesSection from './components/ServicesSection';
-import InternForm from './components/InternForm';
-import BrokerDashboard from './components/BrokerDashboard';
-import AdminPanel from './components/AdminPanel';
-import SortControls from './components/SortControls';
-import Footer from './components/Footer';
-import api from './app';
+import React, { useState, useEffect } from 'react'
+import Header from './components/Header.jsx'
+import Sidebar from './components/Sidebar.jsx'
+import LoginModal from './components/LoginModal.jsx'
+import PropertyModal from './components/PropertyModal.jsx'
+import HomeSection from './components/HomeSection.jsx'
+import AboutSection from './components/AboutSection.jsx'
+import ServicesSection from './components/ServicesSection.jsx'
+import InternForm from './components/InternForm.jsx'
+import BrokerDashboard from './components/BrokerDashboard.jsx'
+import AdminPanel from './components/AdminPanel.jsx'
+import SortControls from './components/SortControls.jsx'
+import Footer from './components/Footer.jsx'
+import api from './api.js'
+
 
 function App() {
   // global state: user, properties, modals…
@@ -55,3 +56,4 @@ function App() {
 }
 
 export default App;
+
