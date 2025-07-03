@@ -3,8 +3,8 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Layout           from './components/Layout.jsx';
-// import Header           from './components/Header.jsx';
-// import Footer           from './components/Footer.jsx';
+import Header           from './components/Header.jsx';
+import Footer           from './components/Footer.jsx';
 import Home             from './pages/Home.jsx';
 import About            from './pages/About.jsx';
 import Services         from './pages/Services.jsx';

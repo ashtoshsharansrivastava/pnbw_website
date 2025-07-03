@@ -4,7 +4,7 @@ export const properties = [
     id: 1,
     title: 'Chhapraula Haathipur kheda, Noida',
     price: 9500000,
-    images: ['chaprolla3.jpg', 'chaprolla2.jpg', 'chaprolla1.jpg'],
+    images: ['/images/chaprolla3.jpg', '/images/chaprolla2.jpg', '/images/chaprolla1.jpg'],
     status: 'Ready to Move',
     rating: 4,
     description: 'Near National Highway Road, Private Hospitals and Clinics.'
@@ -13,7 +13,7 @@ export const properties = [
     id: 2,
     title: 'Kuri  kheda Badalpur, Noida',
     price: 1800000,
-    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    images: ['/images/kerala.jpg', '/images/kerala2.jpg', '/images/kerala3.jpg'],
     status: 'Under Construction',
     rating: 3,
     description: 'Near Rapid Metro Station,Near National Highway Road, Private Hospitals and Clinics..'
@@ -22,7 +22,7 @@ export const properties = [
     id: 3,
     title: 'Dadri Bypass, Dhoom Manikpur',
     price: 6200000,
-    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    images: ['/images/download.jpg', '/images/mumbai2.jpg', '/images/mumbai 3.jpg'],
     status: 'Resale',
     rating: 5,
     description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
@@ -31,7 +31,7 @@ export const properties = [
     id: 4,
     title: 'Sainisunpura Tilpta, Noida',
     price: 3000000,
-    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    images: ['/images/punjab.jpg', '/images/punjab2.jpg', '/images/punjab3.jpg'],
     status: 'Ready to Move',
     rating: 2,
     description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
@@ -40,7 +40,7 @@ export const properties = [
     id: 5,
     title: 'Bhikkanpur Duhai, Ghaziabad',
     price: 4200000,
-    images: ['himachal.jpg', 'himachal2.jpg', 'himachal3.jpg'],
+    images: ['/images/himachal.jpg', '/images/himachal2.jpg', '/images/himachal3.jpg'],
     status: 'Under Construction',
     rating: 3,
     description: 'Near Indian Railway Station and Goverment Minimal distance from general store and farm house.'
@@ -49,7 +49,7 @@ export const properties = [
     id: 6,
     title: 'Navipur Sultanpur, Muradnagar',
     price: 2500000,
-    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    images: ['/images/rajasthan.jpg', '/images/rajasthan2.jpg', '/images/rajasthan3.jpg'],
     status: 'Resale',
     rating: 4,
     description: 'Near Goverment Hospitals and Banks nearby.'
@@ -58,7 +58,7 @@ export const properties = [
     id: 7,
     title: 'Morta Shahpur, Ghaziabad',
     price: 9500000,
-    images: ['goa.jpg', 'goa2.jpg', 'goa3.jpg'],
+    images: ['/images/goa.jpg', '/images/goa2.jpg', '/images/goa3.jpg'],
     status: 'Ready to Move',
     rating: 4,
     description: 'A beautiful villa overlooking the Arabian Sea with 3 bedrooms, 2 bathrooms, and a private pool.'
@@ -67,7 +67,7 @@ export const properties = [
     id: 8,
     title: 'Rajnagar Extension, Morti',
     price: 1800000,
-    images: ['kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
+    images: ['/images/kerala.jpg', 'kerala2.jpg', 'kerala3.jpg'],
     status: 'Under Construction',
     rating: 3,
     description: 'A riverside plot in Kerala, perfect for building a dream home surrounded by nature.'
@@ -76,7 +76,7 @@ export const properties = [
     id: 9,
     title: 'Mohiuddinpur, Modinagar ',
     price: 6200000,
-    images: ['download.jpg', 'mumbai2.jpg', 'mumbai 3.jpg'],
+    images: ['/images/download.jpg', '/images/mumbai2.jpg', '/images/mumbai 3.jpg'],
     status: 'Resale',
     rating: 5,
     description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
@@ -85,7 +85,7 @@ export const properties = [
     id: 10,
     title: 'Tranika City-Teela Village, Loni',
     price: 3000000,
-    images: ['punjab.jpg', 'punjab2.jpg', 'punjab3.jpg'],
+    images: ['/images/punjab.jpg', '/images/punjab2.jpg', '/images/punjab3.jpg'],
     status: 'Ready to Move',
     rating: 2,
     description: 'Sprawling farm land in Punjab, ideal for agricultural or residential development.'
@@ -94,7 +94,7 @@ export const properties = [
     id: 11,
     title: 'Jewar Tappal, Yamuna Expressway',
     price: 4200000,
-    images: ['jewar4.jpg', 'jewar3.jpg', 'jevar2.jpg', 'jevar1.jpg'],
+    images: ['/images/jewar4.jpg', '/images/jewar3.jpg', '/images/jevar2.jpg', 'jevar1.jpg'],
     status: 'Under Construction',
     rating: 3,
     description: 'Near Goverment Hospitals and Banks nearby.'
@@ -103,7 +103,7 @@ export const properties = [
     id: 12,
     title: 'Chhata Mathura, Vrindavan',
     price: 2500000,
-    images: ['rajasthan.jpg', 'rajasthan2.jpg', 'rajasthan3.jpg'],
+    images: ['/images/rajasthan.jpg', '/images/rajasthan2.jpg', '/images/rajasthan3.jpg'],
     status: 'Resale',
     rating: 4,
     description: 'Unique desert plot in Rajasthan with easy access to historical sites and tourist attractions.'

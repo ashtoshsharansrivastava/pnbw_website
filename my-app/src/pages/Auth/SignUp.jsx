@@ -1,80 +1,134 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store/useAuthStore.js';
+// src/pages/SignUp.jsx
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function SignUp() {
-  const signup = useAuthStore((s) => s.signup);
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', applyBroker: false, ref: ''
-  });
-  const navigate = useNavigate();
+    fullName: '',
+    email: '',
+    phone: '',
+    applyBroker: false,
+    referralCode: '',
+  })
+  const navigate = useNavigate()
 
-  const handle = (key) => (e) => {
-    const val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    setForm({ ...form, [key]: val });
-  };
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target
+    setForm((f) => ({
+      ...f,
+      [name]: type === 'checkbox' ? checked : value,
+      // if unchecking broker, clear the referralCode
+      ...(name === 'applyBroker' && !checked ? { referralCode: '' } : {}),
+    }))
+  }
 
-  const handleSubmit = async () => {
-    try {
-      await signup(form);
-      navigate('/', { replace: true });
-    } catch {
-      // handle error…
-    }
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // TODO: send `form` to your signup API
+    console.log('Signing up:', form)
+    navigate('/', { replace: true })
+  }
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center"
-      style={{ backgroundColor: '#36454F' }}
-    >
-      <div className="mx-auto max-w-sm w-full space-y-6 bg-white p-6 rounded-xl shadow">
-        <h1 className="text-center text-3xl font-bold text-gray-800">Create account</h1>
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden"
+      >
+        {/* Header */}
+        <div className="bg-blue-600 text-white text-center py-4">
+          <h1 className="text-2xl font-bold">Create Account</h1>
+        </div>
 
-        <input
-          onChange={handle('name')}
-          value={form.name}
-          placeholder="Full Name"
-          className="w-full rounded bg-gray-100 px-4 py-3"
-        />
-        <input
-          onChange={handle('email')}
-          value={form.email}
-          placeholder="Email"
-          className="w-full rounded bg-gray-100 px-4 py-3"
-        />
-        <input
-          onChange={handle('phone')}
-          value={form.phone}
-          placeholder="Phone"
-          className="w-full rounded bg-gray-100 px-4 py-3"
-        />
+        {/* Form Fields */}
+        <div className="p-6 space-y-4">
+          <label className="block">
+            <span className="text-gray-700">Full Name</span>
+            <input
+              type="text"
+              name="fullName"
+              value={form.fullName}
+              onChange={handleChange}
+              placeholder="Your full name"
+              className="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-200 focus:ring-blue-500 focus:border-blue-500 focus:bg-white transition"
+              required
+            />
+          </label>
 
-        <label className="flex items-center gap-2 text-sm text-gray-700">
-          <input
-            type="checkbox"
-            checked={form.applyBroker}
-            onChange={handle('applyBroker')}
-          />
-          Apply to become a broker
-        </label>
+          <label className="block">
+            <span className="text-gray-700">Email Address</span>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              className="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-200 focus:ring-blue-500 focus:border-blue-500 focus:bg-white transition"
+              required
+            />
+          </label>
 
-        {form.applyBroker && (
-          <input
-            onChange={handle('ref')}
-            value={form.ref}
-            placeholder="Referral Code (optional)"
-            className="w-full rounded bg-gray-100 px-4 py-3"
-          />
-        )}
+          <label className="block">
+            <span className="text-gray-700">Phone Number</span>
+            <input
+              type="tel"
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              placeholder="+1 555 123 4567"
+              className="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-200 focus:ring-blue-500 focus:border-blue-500 focus:bg-white transition"
+              required
+            />
+          </label>
 
-        <button
-          onClick={handleSubmit}
-          className="w-full rounded bg-blue-600 text-white py-2 font-bold hover:bg-blue-700"
-        >
-          Sign Up
-        </button>
-      </div>
+          {/* Broker Checkbox */}
+          <label className="inline-flex items-center space-x-2">
+            <input
+              type="checkbox"
+              name="applyBroker"
+              checked={form.applyBroker}
+              onChange={handleChange}
+              className="form-checkbox h-5 w-5 text-blue-600"
+            />
+            <span className="text-gray-700">Apply to become a broker</span>
+          </label>
+
+          {/* Referral Code: only show when applyBroker is checked */}
+          {form.applyBroker && (
+            <label className="block">
+              <span className="text-gray-700">Referral Code</span>
+              <input
+                type="text"
+                name="referralCode"
+                value={form.referralCode}
+                onChange={handleChange}
+                placeholder="Enter referral code"
+                className="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-200 focus:ring-blue-500 focus:border-blue-500 focus:bg-white transition"
+              />
+            </label>
+          )}
+
+          <button
+            type="submit"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition"
+          >
+            Sign Up
+          </button>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-gray-50 text-center py-4">
+          <p className="text-sm text-gray-600">
+            Already have an account?{' '}
+            <Link
+              to="/login"
+              className="text-blue-600 hover:underline font-medium"
+            >
+              Log in
+            </Link>
+          </p>
+        </div>
+      </form>
     </div>
-  );
+  )
 }
