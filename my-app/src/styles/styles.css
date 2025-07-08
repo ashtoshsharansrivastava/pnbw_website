@@ -1,7 +1,7 @@
-/* src/styles/styles.css */
+/* src/styles/styles.css  ───────────────────────────────────────── */
 
-/* 1) Reset & base */
-
+/* 1) Reset & base
+   ---------------------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -16,28 +16,28 @@ html {
 }
 
 body {
-  background-color: #101a23;
+  background-color: #0b1526;   /* ↓ darker, richer blue */
   color: #ffffff;
   line-height: 1.5;
 }
 
-/* 2) Layout container */
-
+/* 2) Layout container
+   ---------------------------------------------------------------- */
 .layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* 3) Header */
-
+/* 3) Header
+   ---------------------------------------------------------------- */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 2rem;
-  background-color: #223649;
-  border-bottom: 1px solid #233748;
+  padding: 1.25rem 2rem;           /* ↑ taller header */
+  background-color: #112131;       /* slightly lighter than body */
+  border-bottom: 1px solid #1a2b3d;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -50,35 +50,41 @@ body {
   text-decoration: none;
   color: #ffffff;
   font-weight: 700;
-  font-size: 1.125rem;
+  font-size: 1.25rem;              /* ↑ bigger logo text */
 }
 
+/* navigation pushed to the right with flex utilities in JSX,
+   so we only style appearance here */
 .header nav {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .header nav a {
   color: #ffffff;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: 1rem;                 /* ↑ bigger links */
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color .2s;
 }
 
 .header nav a.active,
 .header nav a:hover {
-  color: #0b80ee;
+  background-color: #0b80ee;
+  color: #fff;
 }
 
-/* 4) Buttons */
-
+/* 4) Buttons
+   ---------------------------------------------------------------- */
 .btn {
   cursor: pointer;
   border: none;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 0.875rem;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.25rem;
   transition: background-color 0.2s;
 }
 
@@ -92,39 +98,16 @@ body {
 }
 
 .btn-secondary {
-  background-color: #233748;
+  background-color: #1a2b3d;
   color: #fff;
 }
 
 .btn-secondary:hover {
-  background-color: #1f2d3d;
+  background-color: #152432;
 }
 
-/* 5) Search bar */
-
-.search-container {
-  width: 100%;
-  max-width: 960px;
-  margin: 1rem auto;
-  padding: 0 1rem;
-}
-
-.search-container input {
-  width: 100%;
-  height: 3rem;
-  padding: 0 1rem;
-  border: none;
-  border-radius: 0.75rem;
-  background-color: #223649;
-  color: #ffffff;
-}
-
-.search-container input::placeholder {
-  color: #90aecb;
-}
-
-/* 6) Filter tags */
-
+/* 5) Filter tags  (kept)
+   ---------------------------------------------------------------- */
 .filters {
   display: flex;
   gap: 0.5rem;
@@ -135,43 +118,45 @@ body {
 }
 
 .filter-btn {
-  background-color: #223649;
+  background-color: #1a2b3d;
   color: #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   font-size: 0.875rem;
   border: none;
   cursor: pointer;
+  transition: background-color .2s;
 }
 
 .filter-btn:hover {
-  background-color: #1f2d3d;
+  background-color: #152432;
 }
 
-/* 7) Property grid */
-
+/* 6) Property grid
+   ---------------------------------------------------------------- */
 .property-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
-  gap: 1rem;
-  max-width: 960px;
-  margin: 0 auto 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  max-width: 1240px;
+  margin: 0 auto 3rem;
   padding: 0 1rem;
 }
 
-/* 8) Property card */
-
+/* 7) Property card
+   ---------------------------------------------------------------- */
 .property-card {
-  background-color: #192834;
+  background-color: #131f2c;
   border-radius: 0.75rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .property-card .card-image {
   width: 100%;
-  padding-top: 56.25%; /* 16:9 */
+  padding-top: 56.25%;          /* 16:9 aspect */
   background-position: center;
   background-size: cover;
 }
@@ -183,7 +168,7 @@ body {
 
 .property-card .card-content h3 {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.25rem;
 }
 
@@ -193,13 +178,13 @@ body {
   margin-bottom: 0.25rem;
 }
 
-/* 9) Footer */
-
+/* 8) Footer
+   ---------------------------------------------------------------- */
 .footer {
   text-align: center;
   padding: 2rem 1rem;
-  background-color: #101a23;
-  border-top: 1px solid #223649;
+  background-color: #0b1526;
+  border-top: 1px solid #1a2b3d;
   margin-top: auto;
 }
 
@@ -220,13 +205,13 @@ body {
   font-size: 1.25rem;
 }
 
-/* 10) Utility */
-
+/* 9) Utility
+   ---------------------------------------------------------------- */
 .text-center { text-align: center; }
-.hidden { display: none; }
+.hidden      { display: none; }
 
-/* Responsive tweaks */
-
+/* 10) Responsive tweaks
+   ---------------------------------------------------------------- */
 @media (min-width: 768px) {
   .header nav { display: flex; }
 }

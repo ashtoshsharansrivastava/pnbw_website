@@ -1,81 +1,85 @@
 // src/components/Header.jsx
-import React from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { useAuthStore } from '../store/useAuthStore.js'
-import SearchBar from './SearchBar.jsx'
+import React, { useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/useAuthStore.js';
+import { motion } from 'framer-motion';
 
 export default function Header() {
-  const user     = useAuthStore(s => s.user)
-  const logout   = useAuthStore(s => s.logout)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const user = useAuthStore((s) => s.user);
+  const logout = useAuthStore((s) => s.logout);
+
+  /* search / sort state shared with SearchBar */
+  const [query, setQuery] = useState('');
+  const [sort, setSort] = useState('popular');
+
+  /* button style helpers */
+  const btnBase =
+    'px-12 py-6 text-3xl rounded-full font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg';
+  const navIdle = 'text-white hover:text-accent bg-transparent';
+  const navActive = 'text-accent bg-transparent border-b-4 border-accent';
+  const authBtn = 'bg-accent text-white hover:bg-accent/80 backdrop-blur';
+
+  /* navigation map */
+  const nav = [
+    { to: '/', label: 'Home', exact: true },
+    { to: '/about', label: 'About' },
+    { to: '/services', label: 'Services' },
+  ];
 
   const handleLogout = () => {
-    logout()
-    navigate('/login', { replace: true })
-  }
-
-  /* core button styles */
-  const btnBase = 'px-8 py-4 rounded-md font-semibold transition-colors duration-300 focus:outline-none'
-
-  /* NAV buttons: white text, red background variants (translucent) */
-  const navIdle   = 'bg-red-600/20 text-white hover:bg-red-600/40'
-  const navActive = 'bg-red-700/70 text-white shadow-lg'
-
-  /* login / logout translucent white */
-  const miscBtnIdle = 'bg-white/10 text-white hover:bg-white/20 backdrop-blur'
-
-  const navItems = [
-    { to: '/',        label: 'Home'     },
-    { to: '/about',   label: 'About'    },
-    { to: '/services',label: 'Services' },
-  ]
+    logout();
+    navigate('/login', { replace: true });
+  };
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-900/10 backdrop-blur px-12 py-6 flex items-center gap-8">
-      {/* Logo */}
-      <Link to="/" className="flex items-center gap-3 text-4xl font-extrabold text-white">
-        <svg className="w-8 h-8" viewBox="0 0 48 48" fill="currentColor">
-          <path d="M44 4H30.667V17.333H17.333V30.667H4V44H44V4Z" />
-        </svg>
+    <header className="sticky top-0 z-50 flex items-center justify-between px-12 py-12 bg-black/40 backdrop-blur-lg shadow-2xl">
+      {/* ───────────────── Logo ───────────────── */}
+      <Link
+        to="/"
+        className="flex items-center gap-6 text-7xl font-extrabold text-white hover:text-accent transition-colors"
+      >
+        <img
+          src="/images/logo.jpg"  // Path to the image
+          alt="Logo"
+          className="w-16 h-16 transform transition-all hover:rotate-12 hover:scale-110"
+        />
         PNBW-officials
       </Link>
 
-      {/* Nav links */}
-      <nav className="flex space-x-28">
-        {navItems.map(({ to, label }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={to === '/'}
-            className={({ isActive }) => `${btnBase} ${isActive ? navActive : navIdle}`}
-          >
-            {label}
-          </NavLink>
-        ))}
-      </nav>
+      {/* ──────────────── Right cluster ──────────────── */}
+      <div className="flex items-center gap-12">
+        {/* Nav links */}
+        <nav className="flex gap-12">
+          {nav.map(({ to, label, exact }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={exact}
+              className={({ isActive }) =>
+                `${btnBase} ${isActive ? navActive : navIdle}`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
 
-      <div className="flex-1" />
-
-      {/* Auth + Search */}
-      <div className="flex items-center space-x-8">
+        {/* Auth */}
         {user ? (
-          <button onClick={handleLogout} className={`${btnBase} ${miscBtnIdle}`}>Logout</button>
+          <motion.button
+            onClick={handleLogout}
+            className={`${btnBase} ${authBtn}`}
+            whileHover={{ scale: 1.05 }}
+          >
+            Logout
+          </motion.button>
         ) : (
-          <Link to="/login" className={`${btnBase} ${miscBtnIdle}`}>Login</Link>
+          <Link to="/login" className={`${btnBase} ${authBtn}`}>
+            Login
+          </Link>
         )}
-
-        <SearchBar
-          value=""
-          onChange={() => {}}
-          sort="Popular"
-          onSort={() => {}}
-          onSearch={(q)=>navigate(`/?search=${encodeURIComponent(q)}`)}
-          className="h-14 w-80 bg-white/5 backdrop-blur rounded-lg"
-          inputClassName="px-4 py-3 text-sm text-gray-900 placeholder-gray-500"
-          selectClassName="px-3 py-3 text-sm text-gray-900"
-          buttonClassName="px-4 py-3 bg-indigo-600 hover:bg-indigo-700"
-        />
       </div>
     </header>
-  )
+  );
 }

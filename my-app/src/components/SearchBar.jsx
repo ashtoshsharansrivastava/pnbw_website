@@ -1,76 +1,65 @@
 // src/components/SearchBar.jsx
-import { useState } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import React from 'react';
+import { FiSearch } from 'react-icons/fi';   // lightweight search icon
 
 export default function SearchBar({
-  value,
-  onChange,
-  sort,
-  onSort,
-  onSearch,
-  className = '',
-  inputClassName = '',
-  selectClassName = '',
-  buttonClassName = '',
+  /* ------- controlled props ----------------------------------- */
+  value,             // search text
+  onChange,          // fn(text)
+  sort,              // current sort value (eg. "popular")
+  onSort,            // fn(value)
+  onSearch,          // fn(text)
+  /* ------- UI    props ---------------------------------------- */
+  sortOptions = [
+    { label: 'Popular',             value: 'popular'     },
+    { label: 'Price: Low → High',   value: 'price-asc'   },
+    { label: 'Price: High → Low',   value: 'price-desc'  },
+    { label: 'Newest',              value: 'newest'      },
+    { label: 'Oldest',              value: 'oldest'      },
+  ],
+  className        = '',
+  inputClassName   = '',
+  selectClassName  = '',
+  buttonClassName  = '',
 }) {
-  const [local, setLocal] = useState(value)
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    onChange(local)
-    onSearch?.(local)
-  }
+  /* fire onSearch when user presses <Enter> in the input */
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') onSearch?.(value);
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`
-        flex items-center w-full max-w-xl bg-slate-800 rounded-full shadow-lg overflow-hidden
-        transition-shadow hover:shadow-xl
-        ${className}
-      `}
-    >
-      {/* Search Input */}
+    <div className={`flex items-center gap-2 ${className}`}>
+      {/* text field */}
       <input
         type="text"
-        value={local}
-        onChange={(e) => setLocal(e.target.value)}
         placeholder="Search for properties…"
-        className={`
-          flex-grow text-white placeholder-gray-400 bg-transparent focus:outline-none
-          px-4 py-3 text-lg
-          ${inputClassName}
-        `}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
+        onKeyDown={handleKeyDown}
+        className={`flex-1 bg-transparent focus:outline-none ${inputClassName}`}
       />
 
-      {/* Sort Dropdown */}
+      {/* sort dropdown */}
       <select
         value={sort}
-        onChange={(e) => onSort(e.target.value)}
-        className={`
-          bg-slate-700 text-white focus:outline-none
-          text-lg px-4 py-3
-          ${selectClassName}
-        `}
+        onChange={(e) => onSort?.(e.target.value)}
+        className={`rounded-md ${selectClassName}`}
       >
-        <option value="Popular">Popular</option>
-        <option value="Location A→Z">Location A→Z</option>
-        <option value="Location Z→A">Location Z→A</option>
-        <option value="Price Low→High">Price Low→High</option>
-        <option value="Price High→Low">Price High→Low</option>
+        {sortOptions.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
       </select>
 
-      {/* Submit Button */}
+      {/* search button */}
       <button
-        type="submit"
-        className={`
-          flex items-center justify-center bg-blue-600 hover:bg-blue-700
-          px-4 py-3
-          ${buttonClassName}
-        `}
+        onClick={() => onSearch?.(value)}
+        className={`${buttonClassName}`}
+        aria-label="Search"
       >
-        <HiOutlineSearch className="w-6 h-6 text-white" />
+        <FiSearch className="w-5 h-5" />
       </button>
-    </form>
-  )
+    </div>
+  );
 }

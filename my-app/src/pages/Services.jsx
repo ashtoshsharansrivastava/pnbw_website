@@ -1,51 +1,38 @@
 // src/pages/Services.jsx
-import React from 'react'
-import { FaHome, FaKey, FaTags, FaMoneyCheckAlt, FaUserTie } from 'react-icons/fa'
-
 export default function Services() {
-  const services = [
-    { icon: <FaHome className="w-12 h-12 text-red-600" />, title: 'Buy', desc: 'Curated property matchmaking tailored to your needs.' },
-    { icon: <FaKey className="w-12 h-12 text-red-600" />, title: 'Rent', desc: 'Verified rentals with zero brokerage and flexible terms.' },
-    { icon: <FaTags className="w-12 h-12 text-red-600" />, title: 'Sell', desc: '3D tours & digital marketing pack to showcase your property.' },
-    { icon: <FaMoneyCheckAlt className="w-12 h-12 text-red-600" />, title: 'Mortgage', desc: 'Partner bank pre-approvals with competitive rates.' },
-    { icon: <FaUserTie className="w-12 h-12 text-red-600" />, title: 'Find an Agent', desc: 'Top-rated brokers in your area ready to assist.' },
-  ];
-
   return (
-    <main className="min-h-screen w-full bg-white py-20">
-      <section className="w-full px-6">
+    <main className="min-h-screen bg-midnight text-white py-16">
+      <div className="container mx-auto px-6 space-y-10">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold text-gray-800">Our Services</h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto text-center">
-            We provide end-to-end real estate solutions to make your journey seamless.
+        <header className="text-center space-y-4">
+          <h1 className="text-5xl font-extrabold">Our Services</h1>
+          <p className="text-gray-300 text-lg">
+            We provide cutting-edge solutions to help you navigate the real estate market seamlessly.
           </p>
-        </div>
+        </header>
 
-        {/* Services Grid */}
-        <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
-            <div
-              key={s.title}
-              className="flex flex-col items-center bg-white rounded-xl p-10 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-3"
-            >
-              {/* Icon */}
-              <div className="bg-red-100 p-4 rounded-full mb-6">
-                {s.icon}
-              </div>
+        {/* Service List */}
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold">What We Offer</h2>
+          <ul className="list-disc list-inside space-y-3 text-gray-300">
+            <li><strong>Property Listings:</strong> Explore our curated listings of the best properties across India.</li>
+            <li><strong>Property Management:</strong> We offer professional property management services for owners.</li>
+            <li><strong>Broker Network:</strong> Connect with expert brokers in your area who know the market.</li>
+            <li><strong>Real Estate Consultancy:</strong> Get personalized advice from our real estate experts.</li>
+            <li><strong>Investment Opportunities:</strong> Let us guide you in making profitable investments in real estate.</li>
+          </ul>
+        </section>
 
-              {/* Title & Description */}
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">{s.title}</h2>
-              <p className="text-gray-600 text-center leading-relaxed flex-grow">{s.desc}</p>
-
-              {/* Learn More Button */}
-              <button className="mt-6 px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md font-medium transition">
-                Learn More
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
+        {/* Call to Action */}
+        <section className="text-center">
+          <a
+            href="/contact"
+            className="inline-block mt-6 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition"
+          >
+            Contact Us
+          </a>
+        </section>
+      </div>
     </main>
   )
 }

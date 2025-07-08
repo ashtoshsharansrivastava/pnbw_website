@@ -1,95 +1,55 @@
-// src/pages/Login.jsx
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
+// src/pages/Auth/Login.jsx
 export default function Login() {
-  const [mode, setMode] = useState('phone') // or 'email'
-  const [identifier, setIdentifier] = useState('')
-  const navigate = useNavigate()
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    // TODO: trigger send OTP / login request
-    console.log(`Logging in via ${mode}:`, identifier)
-    navigate('/') // after success
-  }
-
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden"
-      >
-        {/* Header */}
-        <div className="bg-slate-900 text-white text-center py-4">
-          <h1 className="text-xl font-bold">Welcome Back</h1>
-        </div>
-
-        {/* Toggle */}
-        <div className="flex">
-          <button
-            type="button"
-            onClick={() => setMode('phone')}
-            className={`flex-1 py-2 text-center ${
-              mode === 'phone'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-500'
-            }`}
-          >
-            Phone
-          </button>
-          <button
-            type="button"
-            onClick={() => setMode('email')}
-            className={`flex-1 py-2 text-center ${
-              mode === 'email'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-500'
-            }`}
-          >
-            Email
-          </button>
-        </div>
-
-        {/* Form */}
-        <div className="p-6 space-y-4">
-          <label className="block">
-            <span className="text-gray-700">
-              {mode === 'phone' ? 'Phone Number' : 'Email Address'}
-            </span>
-            <input
-              type={mode === 'phone' ? 'tel' : 'email'}
-              value={identifier}
-              onChange={e => setIdentifier(e.target.value)}
-              placeholder={
-                mode === 'phone' ? 'e.g. +1 555 123 4567' : 'you@example.com'
-              }
-              className="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-200 focus:ring-blue-500 focus:border-blue-500 focus:bg-white transition"
-              required
-            />
-          </label>
-
-          <button
-            type="submit"
-            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition"
-          >
-            Send OTP
-          </button>
-        </div>
-
-        {/* Footer */}
-        <div className="bg-gray-50 text-center py-4">
-          <p className="text-sm">
-            Don’t have an account?{' '}
-            <Link
-              to="/signup"
-              className="text-blue-600 hover:underline font-medium"
-            >
-              Sign up
-            </Link>
+    <main className="min-h-screen bg-midnight text-white py-16">
+      <div className="container mx-auto px-6 space-y-10">
+        {/* Hero Section */}
+        <header className="text-center space-y-4">
+          <h1 className="text-5xl font-extrabold">Login</h1>
+          <p className="text-gray-300 text-lg">
+            Welcome back! Please log in to access your account.
           </p>
-        </div>
-      </form>
-    </div>
+        </header>
+
+        {/* Login Form */}
+        <section className="space-y-6 max-w-md mx-auto">
+          <div>
+            <label htmlFor="email" className="block text-lg font-medium text-gray-300">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              className="mt-2 p-4 w-full rounded-md bg-transparent border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500"
+              placeholder="Enter your email"
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="password" className="block text-lg font-medium text-gray-300">Password</label>
+            <input
+              type="password"
+              id="password"
+              className="mt-2 p-4 w-full rounded-md bg-transparent border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div className="text-center">
+            <button
+              type="submit"
+              className="w-full py-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition"
+            >
+              Log In
+            </button>
+          </div>
+        </section>
+
+        {/* Sign-up Option */}
+        <section className="text-center">
+          <p className="text-gray-300">
+            Don't have an account? <a href="/signup" className="text-indigo-400 hover:text-indigo-500">Sign Up</a>
+          </p>
+        </section>
+      </div>
+    </main>
   )
 }

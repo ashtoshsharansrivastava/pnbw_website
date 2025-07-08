@@ -17,7 +17,6 @@ import Dashboard        from './pages/Admin/Dashboard.jsx';
 import BrokerManagement from './pages/Admin/BrokerManagement.jsx';
 import SiteManagement   from './pages/Admin/SiteManagement.jsx';
 import './styles/styles.css';
-
 import './index.css';
 
 import { useAuthStore } from './store/useAuthStore.js';
@@ -29,37 +28,39 @@ function RequireAuth({ children }) {
 
 export default function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/"             element={<Home/>} />
-        <Route path="/about"        element={<About/>} />
-        <Route path="/services"     element={<Services/>} />
-        <Route path="/property/:id" element={<PropertyDetail/>} />
-        <Route path="/login"        element={<Login/>} />
-        <Route path="/signup"       element={<SignUp/>} />
+    <div className="bg-midnight text-white min-h-screen"> {/* Apply the dark-blue background globally */}
+      <Layout>
+        <Routes>
+          <Route path="/"             element={<Home/>} />
+          <Route path="/about"        element={<About/>} />
+          <Route path="/services"     element={<Services/>} />
+          <Route path="/property/:id" element={<PropertyDetail/>} />
+          <Route path="/login"        element={<Login/>} />
+          <Route path="/signup"       element={<SignUp/>} />
 
-        <Route
-          path="/broker"
-          element={
-            <RequireAuth>
-              <BrokerDashboard/>
-            </RequireAuth>
-          }
-        />
+          <Route
+            path="/broker"
+            element={
+              <RequireAuth>
+                <BrokerDashboard/>
+              </RequireAuth>
+            }
+          />
 
-        <Route
-          path="/admin/*"
-          element={
-            <RequireAuth>
-              <AdminLayout/>
-            </RequireAuth>
-          }
-        >
-          <Route index         element={<Dashboard/>} />
-          <Route path="brokers" element={<BrokerManagement/>} />
-          <Route path="sites"   element={<SiteManagement/>} />
-        </Route>
-      </Routes>
-    </Layout>
+          <Route
+            path="/admin/*"
+            element={
+              <RequireAuth>
+                <AdminLayout/>
+              </RequireAuth>
+            }
+          >
+            <Route index         element={<Dashboard/>} />
+            <Route path="brokers" element={<BrokerManagement/>} />
+            <Route path="sites"   element={<SiteManagement/>} />
+          </Route>
+        </Routes>
+      </Layout>
+    </div>
   );
 }
