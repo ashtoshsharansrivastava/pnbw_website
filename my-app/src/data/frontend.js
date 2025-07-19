@@ -1,5 +1,6 @@
 // src/data/frontend.js
-export const properties = [
+
+export const sites = [
   {
     id: 1,
     title: 'Chhapraula Haathipur kheda, Noida',
@@ -350,7 +351,8 @@ export const properties = [
     status: 'Resale',
     rating: 5,
     description: 'Luxurious 2 BHK apartment in South Mumbai with skyline views, gym access, & 24/7 security.'
-  },
+  }];
+  export const reviewQueue = [
   {
     id: 41,
     title: 'Radha Krishna Dham, Vrindavan',

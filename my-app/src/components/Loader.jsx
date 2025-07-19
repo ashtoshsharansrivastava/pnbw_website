@@ -1,6 +1,6 @@
 // src/components/Loader.jsx
 import React from 'react';
-// import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';  // ← add this line
 
 export default function Loader() {
   return (
@@ -11,7 +11,7 @@ export default function Loader() {
         transition={{
           repeat: Infinity,
           duration: 1,
-          ease: 'linear'
+          ease: 'linear',
         }}
       />
     </div>

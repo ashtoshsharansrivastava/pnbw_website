@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from 'react';
+// src/pages/Admin/SiteManagement.jsx
+import React, { useState, useEffect } from 'react';
 import * as api from '../../api/sites.js';
-import Loader from '../../components/Loader.jsx';
+import { sites as mockSites, reviewQueue as mockQueue } from '../../data/frontend.js';
 
 export default function SiteManagement() {
-  const [sites, setSites] = useState([]);
-  const [queue, setQueue] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // start immediately with your mocks
+  const [sites, setSites] = useState(mockSites || []);
+  const [queue, setQueue] = useState(mockQueue || []);
 
-  const load = async () => {
-    setSites(await api.list());
-    setQueue(api.reviewQueue);
-    setLoading(false);
-  };
-
+  // sanity‐check: print them once
   useEffect(() => {
-    load();
+    console.log('mockSites:', mockSites);
+    console.log('mockQueue:', mockQueue);
   }, []);
 
   const handlePublish = (id) => {
     api.publish(id);
-    load();
+    setQueue(q => q.filter(s => s.id !== id));
+    const published = queue.find(s => s.id === id);
+    if (published) {
+      setSites(s => [...s, { ...published, published: true, active: true }]);
+    }
   };
 
   const handleMarkSold = (id) => {
     api.markSold(id);
-    load();
+    setSites(s => s.map(site => site.id === id ? { ...site, active: false } : site));
   };
-
-  if (loading) return <Loader />;
 
   return (
     <div className="space-y-8">
@@ -49,12 +48,16 @@ export default function SiteManagement() {
               </tr>
             </thead>
             <tbody>
-              {sites.map(s => (
+              {sites.length > 0 ? sites.map(s => (
                 <tr key={s.id} className="border-b border-skin-base/30">
                   <td className="px-4 py-2">{s.name}</td>
                   <td className="px-4 py-2">{s.address}</td>
                   <td className="px-4 py-2">
-                    <span className="px-2 py-1 rounded-full text-xs bg-green-600">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        s.published ? 'bg-green-600' : 'bg-yellow-500'
+                      }`}
+                    >
                       {s.published ? 'Published' : 'Draft'}
                     </span>
                   </td>
@@ -63,13 +66,15 @@ export default function SiteManagement() {
                   <td className="px-4 py-2">
                     <button
                       onClick={() => handleMarkSold(s.id)}
-                      className="rounded bg-red-600 px-3 py-1 text-sm"
+                      className="rounded bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700 transition"
                     >
                       Mark Sold
                     </button>
                   </td>
                 </tr>
-              ))}
+              )) : (
+                <tr><td colSpan={6} className="p-4 text-center">No sites to display</td></tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -89,7 +94,7 @@ export default function SiteManagement() {
               </tr>
             </thead>
             <tbody>
-              {queue.map(s => (
+              {queue.length > 0 ? queue.map(s => (
                 <tr key={s.id} className="border-b border-skin-base/30">
                   <td className="px-4 py-2">{s.name}</td>
                   <td className="px-4 py-2">{s.address}</td>
@@ -97,17 +102,19 @@ export default function SiteManagement() {
                   <td className="px-4 py-2">
                     <button
                       onClick={() => handlePublish(s.id)}
-                      className="rounded bg-skin-accent px-3 py-1 text-sm"
+                      className="rounded bg-skin-accent px-3 py-1 text-sm text-white hover:opacity-90 transition"
                     >
                       Publish
                     </button>
                   </td>
                 </tr>
-              ))}
+              )) : (
+                <tr><td colSpan={4} className="p-4 text-center">No pending sites</td></tr>
+              )}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-);
+  );
 }

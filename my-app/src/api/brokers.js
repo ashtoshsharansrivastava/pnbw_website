@@ -1,19 +1,24 @@
-let brokers = [
-    { id: 1, name: 'Ethan Harper', phone: '555‑123‑4567', referrals: 15, profit: 180000, status: 'active', sites: 10, code: 'PNBW‑12345' },
-    // ...more seed rows
-  ];
-  export const all = async () => brokers;
-  export const addReferral = (code) => {
-    const b = brokers.find(x => x.code === code);
-    if (b) b.referrals += 1;
-  };
-  export const queue = [];
-  export const approve = (id) => {
-    const idx = queue.findIndex(x => x.id === id);
-    if (idx > -1) {
-      const [b] = queue.splice(idx, 1);
-      b.status = 'active';
-      b.code = `PNBW-${Math.floor(10000 + Math.random()*90000)}`;
-      brokers.push(b);
-    }
-  };
+// src/api/brokers.js
+const BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+
+export async function getBrokerStats(id) {
+  const res = await fetch(`${BASE}/brokers/${id}/stats`);
+  if (!res.ok) throw new Error('Failed to fetch stats');
+  return res.json();
+}
+
+export async function getBrokerListings(id) {
+  const res = await fetch(`${BASE}/brokers/${id}/listings`);
+  if (!res.ok) throw new Error('Failed to fetch listings');
+  return res.json();
+}
+
+export async function getAllBrokers() {
+  const res = await fetch(`${BASE}/brokers`);
+  return res.json();
+}
+
+export async function approveBroker(id) {
+  const res = await fetch(`${BASE}/brokers/${id}/approve`, { method: 'POST' });
+  return res.json();
+}
