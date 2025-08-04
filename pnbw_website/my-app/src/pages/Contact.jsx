@@ -155,10 +155,10 @@ export default function Contact() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Call Us</h3>
               <p className="text-gray-700 leading-relaxed">
-                +91 98765 43210
+                +91 8860719916
               </p>
               <p className="text-gray-700 leading-relaxed">
-                +91 99887 76655
+                +91 9871309875
               </p>
             </div>
             {/* Email */}

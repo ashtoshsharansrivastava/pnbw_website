@@ -46,7 +46,7 @@ export default function Footer() {
             <Facebook size={28} />
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/pixienestbuildwell/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"

@@ -52,8 +52,7 @@ export default function Dashboard() {
             <div className="text-gray-500 mb-4">
               <LifeBuoy size={64} strokeWidth={1.5} />
             </div>
-            <span className="text-2xl font-bold text-gray-900 mb-2">Support & Help</span>
-            <p className="text-gray-600 text-center">Access documentation and support resources.</p>
+           
           </div>
         </div>
       </div>

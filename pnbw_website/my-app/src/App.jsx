@@ -23,7 +23,7 @@ import './styles/styles.css';
 import './index.css';
 
 import { useAuthStore } from './store/useAuthStore.js';
-import SidePanel from './components/SidePanel.jsx'; // Import the SidePanel component
+
 
 function RequireAuth({ children }) {
   const user = useAuthStore((s) => s.user);
@@ -36,7 +36,7 @@ export default function App() {
       <Layout>
         {/* Removed Header and Footer here, as Layout.jsx typically renders them */}
         {/* <Header /> */}
-        <SidePanel /> {/* Include the side panel here */}
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

@@ -53,7 +53,7 @@ export default function EnquireModal({ isOpen, onClose, property, user }) {
     // --- Client-Side Mailto Link (For Demonstration/Fallback) ---
     // This will open the user's default email client.
     // It's not reliable for commercial use as it depends on client setup.
-    const recipientEmail = 'ashutoshsharansrivastava@gmail.com';
+    const recipientEmail = '@gmail.com';
     const subject = `Property Enquiry: ${property.title} (ID: ${property.id})`;
     const body = `
 Dear PNBW Officials,
