@@ -96,7 +96,7 @@ export default function BrokerDashboard() {
   return (
     <section className="mx-auto max-w-7xl px-6 lg:px-12 xl:px-24 py-8 space-y-10">
       <h1 className="text-4xl font-extrabold text-gray-900 text-center drop-shadow-md">
-        Broker <span className="text-blue-600">Dashboard</span>
+        Agent <span className="text-blue-600">Dashboard</span>
       </h1>
 
       {/* Top-line stats */}

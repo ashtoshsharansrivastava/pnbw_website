@@ -1,4 +1,3 @@
-/* src/styles/theme.css */
 :root {
   /* ─── Neutrals ───────────────────────────── */
   --color-surface-0: #0b1624;  /* page bg, footer */
@@ -17,4 +16,8 @@
 
   /* ─── Header (NEW) ───────────────────────── */
   --color-header: #5fa9ff;      /* light blue bar */
+
+  /* ─── Custom Maroon Gradient ─────────────── */
+  --color-maroon-dark: #800000; /* base maroon */
+  --gradient-maroon-black: linear-gradient(to top, #800000, #000000);
 }

@@ -28,7 +28,7 @@ export default function Footer() {
         {/* Social Media Links */}
         <div className="flex gap-6 text-2xl">
           <a
-            href="https://twitter.com"
+            href="https://x.com/Pixienestbuild"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"

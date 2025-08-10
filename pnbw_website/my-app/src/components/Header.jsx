@@ -46,8 +46,13 @@ export default function Header() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut', delay: 0.3 }} // Slightly longer delay and duration
         >
-          <span className="primary text-blue-400">PNBW</span>{' '} {/* Explicit primary color */}
-          <span className="secondary text-white">Official</span> {/* Explicit secondary color */}
+         <span className="primary font-bold bg-gradient-to-t from-[#800000] to-black bg-clip-text text-transparent">
+  PixieNest BuildWell
+</span>
+
+{' '} {/* Explicit primary color */}
+
+          <span className="secondary text-white"></span> {/* Explicit secondary color */}
         </motion.h1>
       </Link>
 
