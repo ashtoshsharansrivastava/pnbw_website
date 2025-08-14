@@ -6,25 +6,41 @@ export default function About() {
       {/* Edge-to-edge container with responsive padding */}
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 xl:px-24 space-y-16 sm:space-y-20">
 
-        {/* ── Hero Section ───────────────────────────────────────────────────── */}
-        <header className="text-center space-y-6 px-4">
-          <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
-            About <span className="text-blue-600">PNBW Officials</span>
-          </h1>
-          <p className="text-gray-700 text-xl sm:text-2xl max-w-3xl mx-auto">
-            Building trust, delivering dreams—your partner in real estate excellence.
-          </p>
-        </header>
+        {/* ── Hero Section (Design Modified) ─────────────────────────────────── */}
+        <section className="text-center bg-gradient-to-b from-white via-blue-50 to-white rounded-2xl p-12 shadow-sm">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
+              About <span className="text-blue-600">PNBW Officials</span>
+            </h1>
+            <div className="mt-6 mb-8 w-24 h-1.5 bg-blue-600 mx-auto rounded-full" />
+            <p className="text-gray-700 text-xl sm:text-2xl max-w-3xl mx-auto">
+              Building trust, delivering dreams—your partner in real estate excellence.
+            </p>
+          </div>
+        </section>
 
-        {/* ── Our Story ──────────────────────────────────────────────── */}
-        <section className="bg-white p-8 sm:p-10 rounded-xl shadow-lg space-y-6 border border-gray-100">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 border-b-2 border-blue-500 pb-3 mb-4">Our Story</h2>
-          <p className="text-gray-800 leading-relaxed text-lg">
-            **PixieNest BuildWell Pvt Ltd**, operating as PNBW Officials, was founded on **February 12, 2018**, by the visionary duo, **Mr. Hans Raj Singh** and **Mrs. Moni Singh**. Their journey began with a shared passion to revolutionize the real estate landscape in India, making property transactions transparent, accessible, and truly rewarding for everyone involved.
-          </p>
-          <p className="text-gray-800 leading-relaxed text-lg">
-            What started as a commitment to redefine real estate has blossomed into a trusted platform, connecting countless individuals with their ideal properties and empowering partners across the nation. We blend cutting-edge technology with deep industry expertise, ensuring a seamless experience from your first search to the final handshake.
-          </p>
+        {/* ── Our Story (Design Modified) ────────────────────────────────── */}
+        <section className="bg-white p-8 sm:p-12 rounded-2xl shadow-lg border border-gray-100">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8 items-start">
+            {/* Left Column: Heading */}
+            <div className="lg:col-span-1">
+              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight border-l-4 border-blue-600 pl-6">
+                Our
+                <br />
+                Story
+              </h2>
+            </div>
+            
+            {/* Right Column: Content */}
+            <div className="lg:col-span-2 space-y-5">
+              <p className="text-gray-800 leading-relaxed text-lg">
+                <strong>PixieNest BuildWell Pvt Ltd</strong>, operating as PNBW Officials, was founded on <strong>February 12, 2018</strong>, by the visionary duo, <strong>Mr. Hans Raj Singh</strong> and <strong>Mrs. Moni Singh</strong>. Their journey began with a shared passion to revolutionize the real estate landscape in India, making property transactions transparent, accessible, and truly rewarding for everyone involved.
+              </p>
+              <p className="text-gray-800 leading-relaxed text-lg">
+                What started as a commitment to redefine real estate has blossomed into a trusted platform, connecting countless individuals with their ideal properties and empowering partners across the nation. We blend cutting-edge technology with deep industry expertise, ensuring a seamless experience from your first search to the final handshake.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* ── Our Vision ───────────────────────────────────────── */}
@@ -127,9 +143,12 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Founder 1: Mr. Hans Raj Singh */}
             <div className="flex flex-col items-center text-center p-6 bg-blue-50 rounded-lg shadow-md">
-              <div className="w-32 h-32 rounded-full bg-blue-200 flex items-center justify-center text-blue-800 text-5xl font-bold mb-4 overflow-hidden">
-                {/* Placeholder for image - in a real app, use an actual image */}
-                <img src="https://placehold.co/128x128/ADD8E6/00008B?text=HRS" alt="Mr. Hans Raj Singh" className="w-full h-full object-cover"/>
+              <div className="w-32 h-32 rounded-full mb-4 overflow-hidden flex items-center justify-center bg-gray-200">
+                <img 
+                  src="/images/hans-raj-singh.jpg" 
+                  alt="Mr. Hans Raj Singh, Co-Founder & CEO" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="text-2xl font-semibold text-gray-900">Mr. Hans Raj Singh</h3>
               <p className="text-blue-600 text-lg">Co-Founder & CEO</p>
@@ -139,9 +158,12 @@ export default function About() {
             </div>
             {/* Founder 2: Mrs. Moni Singh */}
             <div className="flex flex-col items-center text-center p-6 bg-blue-50 rounded-lg shadow-md">
-              <div className="w-32 h-32 rounded-full bg-pink-200 flex items-center justify-center text-pink-800 text-5xl font-bold mb-4 overflow-hidden">
-                {/* Placeholder for image - in a real app, use an actual image */}
-                <img src="https://placehold.co/128x128/FFB6C1/800000?text=MS" alt="Mrs. Moni Singh" className="w-full h-full object-cover"/>
+              <div className="w-32 h-32 rounded-full mb-4 overflow-hidden flex items-center justify-center bg-gray-200">
+                <img 
+                  src="/images/moni-singh.jpg" 
+                  alt="Mrs. Moni Singh, Co-Founder & COO" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="text-2xl font-semibold text-gray-900">Mrs. Moni Singh</h3>
               <p className="text-blue-600 text-lg">Co-Founder & COO</p>

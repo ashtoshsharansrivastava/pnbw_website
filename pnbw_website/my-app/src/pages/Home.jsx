@@ -81,16 +81,17 @@ export default function Home() {
   }, [props, search, sort]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+    // Changed main background to white
+    <main className="min-h-screen bg-gray-100 text-gray-900">
       {/* Hero Section for Home Page */}
       <section className="relative py-20 px-6 bg-cover bg-center overflow-hidden" style={{ backgroundImage: 'url("/images/hero-bg.jpg")' }}>
-        {/* Overlay for text readability */}
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        {/* Changed overlay opacity and color for a lighter feel */}
+        <div className="absolute inset-0 bg-white opacity-60"></div>
         <div className="relative z-10 text-center">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight animate-fade-in-up">
-            Find Your Dream <span className="text-blue-400">Property</span> Today
+          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 drop-shadow-lg leading-tight animate-fade-in-up">
+            Find Your Dream <span className="text-orange-500">Property</span> Today
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mt-4 max-w-3xl mx-auto drop-shadow animate-fade-in-up delay-200">
+          <p className="text-xl md:text-2xl text-gray-700 mt-4 max-w-3xl mx-auto drop-shadow animate-fade-in-up delay-200">
             Connecting you with the finest real estate opportunities across the nation.
           </p>
           <div className="mt-10 flex justify-center animate-fade-in-up delay-400">
@@ -100,10 +101,11 @@ export default function Home() {
               sort={sort}
               onSort={setSort} // Corrected prop name to setSort
               onSearch={(q) => setSearch(q)}
-              className="w-full max-w-4xl bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-4 flex items-center space-x-3"
+              // Redesigned search bar for a light theme
+              className="w-full max-w-4xl bg-white backdrop-blur-sm rounded-xl shadow-2xl p-4 flex items-center space-x-3"
               inputClassName="flex-1 px-4 py-3 text-lg text-gray-900 placeholder-gray-500 rounded-md bg-transparent focus:outline-none"
-              selectClassName="px-3 py-3 text-lg text-gray-900 bg-gray-100 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              buttonClassName="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              selectClassName="px-3 py-3 text-lg text-gray-900 bg-gray-100 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              buttonClassName="px-5 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
           </div>
         </div>
@@ -111,10 +113,10 @@ export default function Home() {
 
       {/* Property grid */}
       <section className="container mx-auto px-6 py-12 space-y-10">
-        <h2 className="text-4xl font-extrabold text-center text-white drop-shadow-md">Featured Properties</h2>
+        <h2 className="text-4xl font-extrabold text-center text-gray-900 drop-shadow-md">Featured Properties</h2>
 
         {loading && (
-          <p className="text-center text-blue-400 text-xl animate-pulse mt-12">Loading properties...</p>
+          <p className="text-center text-orange-500 text-xl animate-pulse mt-12">Loading properties...</p>
         )}
 
         {error && (
@@ -128,7 +130,7 @@ export default function Home() {
         )}
 
         {!loading && !error && display.length === 0 && (
-          <p className="text-center text-slate-400 text-xl mt-12">
+          <p className="text-center text-gray-500 text-xl mt-12">
             No properties found for “{search}”. Try adjusting your search or filters.
           </p>
         )}
