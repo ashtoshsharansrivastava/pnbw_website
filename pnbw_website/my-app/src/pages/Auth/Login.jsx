@@ -1,4 +1,3 @@
-// src/pages/Auth/Login.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore.js';
@@ -45,24 +44,24 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="w-full max-w-sm mx-auto p-6 space-y-6 bg-white rounded-xl shadow">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-sm mx-auto p-8 space-y-8 bg-white rounded-2xl shadow-xl border border-gray-200">
         {/* Page title */}
-        <h1 className="text-center text-3xl font-bold text-gray-900">
+        <h1 className="text-center text-4xl font-extrabold text-gray-800">
           Welcome Back
         </h1>
 
         {/* Tabs */}
-        <div className="flex gap-6 justify-center border-b border-gray-200 pb-2 text-gray-700">
+        <div className="flex gap-4 justify-center border-b border-gray-300 pb-3 text-gray-700">
           <button
             onClick={() => {
               setTab('phone');
               setStep('enterPhone');
               setError(null);
             }}
-            className={`pb-1 text-lg ${
+            className={`flex-1 text-center py-2 text-xl font-medium rounded-t-lg transition-colors duration-200 ${
               tab === 'phone'
-                ? 'border-b-2 border-indigo-600 text-indigo-600'
+                ? 'text-indigo-600 border-b-2 border-indigo-600'
                 : 'text-gray-500 hover:text-indigo-600'
             }`}
           >
@@ -73,9 +72,9 @@ export default function Login() {
               setTab('email');
               setError(null);
             }}
-            className={`pb-1 text-lg ${
+            className={`flex-1 text-center py-2 text-xl font-medium rounded-t-lg transition-colors duration-200 ${
               tab === 'email'
-                ? 'border-b-2 border-indigo-600 text-indigo-600'
+                ? 'text-indigo-600 border-b-2 border-indigo-600'
                 : 'text-gray-500 hover:text-indigo-600'
             }`}
           >
@@ -93,12 +92,12 @@ export default function Login() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Phone Number"
-                  className="w-full px-4 py-3 bg-gray-50 text-gray-900 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                  className="w-full px-5 py-3 bg-gray-100 text-gray-800 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200"
                 />
                 <button
                   onClick={handleSendOtp}
                   disabled={!phone}
-                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold disabled:opacity-50 transition"
+                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   Send OTP
                 </button>
@@ -110,12 +109,12 @@ export default function Login() {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   placeholder="Enter OTP"
-                  className="w-full px-4 py-3 bg-gray-50 text-gray-900 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                  className="w-full px-5 py-3 bg-gray-100 text-gray-800 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200"
                 />
                 <button
                   onClick={handleVerifyOtp}
                   disabled={!otp}
-                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold disabled:opacity-50 transition"
+                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   Verify &amp; Continue
                 </button>
@@ -132,12 +131,12 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="w-full px-4 py-3 bg-gray-50 text-gray-900 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+              className="w-full px-5 py-3 bg-gray-100 text-gray-800 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200"
             />
             <button
               onClick={handleEmailLogin}
               disabled={!email}
-                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold disabled:opacity-50 transition"
+              className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
             >
               Send Magic Link
             </button>
@@ -146,13 +145,15 @@ export default function Login() {
 
         {/* Error Message */}
         {error && (
-          <p className="text-center text-red-500 font-medium">{error}</p>
+          <p className="text-center text-red-500 font-medium bg-red-100 p-3 rounded-lg border border-red-200">
+            {error}
+          </p>
         )}
 
         {/* Sign Up Link */}
-        <p className="text-center text-sm text-gray-700">
+        <p className="text-center text-base text-gray-600">
           New user?{' '}
-          <Link to="/signup" className="underline text-indigo-600">
+          <Link to="/signup" className="underline font-semibold text-indigo-600 hover:text-indigo-800">
             Sign up
           </Link>
         </p>
