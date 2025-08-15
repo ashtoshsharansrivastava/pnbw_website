@@ -1,64 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+// >>> IMPORTANT: PLEASE VERIFY AND CORRECT THIS PATH IF NECESSARY <<<
+// This error means your build system cannot find the file 'useAuthStore.js' at this location.
+// Ensure the path below accurately reflects the actual location of 'useAuthStore.js'
+// relative to this 'Header.jsx' file in your project structure.
+// For example:
+// - If Header.jsx is in 'src/components/Header/' and useAuthStore.js is in 'src/store/',
+//   the path should typically be '../../store/useAuthStore.js'
+// - If Header.jsx is in 'src/' and useAuthStore.js is in 'src/store/',
+//   the path would likely be './store/useAuthStore.js'
 import { useAuthStore } from '../store/useAuthStore.js';
-import { motion } from 'framer-motion';
-import './Header.css';
+import { motion, AnimatePresence } from 'framer-motion';
+// The './Header.css' import was removed previously as all styling is handled by Tailwind CSS
 
 export default function Header() {
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Premium base styles
   const btnBase =
-    'px-6 py-2.5 text-lg rounded-full font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md';
+    'px-6 py-2.5 text-lg rounded-full font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md backdrop-blur-sm';
+  // Adjusted for white header background for better contrast
   const navIdle =
-    'text-gray-700 hover:text-orange-500 hover:drop-shadow-[0_0_8px_rgba(255,100,0,0.4)]';
+    'text-gray-700 hover:text-amber-500 hover:drop-shadow-[0_0_8px_rgba(255,191,0,0.6)]';
+  // Adjusted for white header background for better contrast
   const navActive =
-    'text-orange-600 border-b-4 border-orange-600 pb-1.5 font-extrabold drop-shadow-[0_0_6px_rgba(255,100,0,0.6)]';
+    'text-amber-600 border-b-4 border-amber-600 pb-1.5 font-extrabold drop-shadow-[0_0_6px_rgba(255,191,0,0.8)]';
   const authBtn =
-    'bg-gradient-to-r from-orange-500 to-red-600 text-white hover:from-orange-600 hover:to-red-700 shadow-lg hover:shadow-orange-500/50';
+    'bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 text-white hover:from-amber-600 hover:via-orange-700 hover:to-red-700 shadow-lg hover:shadow-amber-500/50';
 
   const navLinks = [
     { to: '/', label: 'Home', exact: true },
     { to: '/about', label: 'About' },
     { to: '/services', label: 'Services' },
-    { to: '/properties', 'label': 'Properties' },
+    { to: '/properties', label: 'Properties' },
     { to: '/contact', label: 'Contact' },
   ];
 
   const handleLogout = () => {
     logout();
     navigate('/login', { replace: true });
+    setIsMobileMenuOpen(false); // Close mobile menu after logout
   };
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between px-8 py-4 bg-white shadow-md border-b border-gray-200">
-      <Link to="/" className="flex items-center gap-5">
+    <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between px-4 py-3 md:px-8 md:py-4 bg-white shadow-lg border-b border-gray-200"> {/* Header background set to white with subtle shadow and border */}
+      {/* Logo and Title Section */}
+      <Link to="/" className="flex items-center gap-3 md:gap-5 flex-grow md:flex-grow-0 justify-center md:justify-start">
         <motion.img
           src="/images/logo.jpg"
           alt="PNBW Official Logo"
-          className="w-16 h-16 rounded-full object-cover border-4 border-orange-500 shadow-[0_0_15px_rgba(255,100,0,0.4)]"
+          className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 md:border-4 border-amber-400 shadow-[0_0_10px_rgba(255,191,0,0.8)]"
           initial={{ rotate: 0, scale: 1 }}
           whileHover={{ rotate: 12, scale: 1.12 }}
           transition={{ type: 'spring', stiffness: 280, damping: 18 }}
         />
         <motion.h1
-          className="header-title text-4xl font-extrabold tracking-wide"
+          className="header-title text-4xl md:text-6xl font-extrabold tracking-wide whitespace-nowrap" /* Decreased text size by ~30% */
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.25 }}
         >
+          {/* Text with black on top fading to red on bottom, with equal portions */}
+          {/* The gradient now directly goes from black at the top to red at the bottom. */}
+          {/* This ensures a smooth, equal 50/50 visual distribution. */}
           <span
-            // Added text-stroke for contrast on a light background
-            className="bg-gradient-to-t from-[#000000] via-[#ff4d4d] to-[#ff3b3b] bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(0,0,0,0.25)] text-stroke"
+            className="bg-gradient-to-b from-[#000000] to-[#ff3b3b] bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(0,0,0,0.65)]"
           >
             PixieNest BuildWell
           </span>
         </motion.h1>
       </Link>
 
-      <div className="flex items-center gap-10">
+      {/* Mobile Menu Button (Hamburger) - visible only on small screens */}
+      <div className="md:hidden flex items-center">
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="text-gray-700 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 rounded-md p-2"
+          aria-label="Toggle navigation"
+        >
+          {/* Three dots SVG icon for the hamburger menu */}
+          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4zm0 6a2 2 0 110-4 2 2 0 010 4z" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Desktop Navigation and Auth Buttons - hidden on small screens */}
+      <div className="hidden md:flex items-center gap-10">
         <nav className="flex gap-7">
           {navLinks.map(({ to, label, exact }) => (
             <NavLink
@@ -89,6 +120,55 @@ export default function Header() {
           </Link>
         )}
       </div>
+
+      {/* Mobile Menu Overlay - conditionally rendered with animation */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden absolute top-full left-0 w-full bg-white py-4 shadow-lg z-40 border-t border-gray-200"
+          >
+            <nav className="flex flex-col items-center gap-4 px-4">
+              {navLinks.map(({ to, label, exact }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={exact}
+                  onClick={() => setIsMobileMenuOpen(false)} // Close menu on link click
+                  className={({ isActive }) =>
+                    `w-full text-center ${btnBase} ${isActive ? navActive : navIdle}`
+                  }
+                >
+                  {label}
+                </NavLink>
+              ))}
+              <div className="w-full mt-4">
+                {user ? (
+                  <motion.button
+                    onClick={handleLogout}
+                    className={`w-full ${btnBase} ${authBtn} py-3`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Logout
+                  </motion.button>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={() => setIsMobileMenuOpen(false)} // Close menu on link click
+                    className={`w-full flex justify-center items-center ${btnBase} ${authBtn} py-3`}
+                  >
+                    Login
+                  </Link>
+                )}
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

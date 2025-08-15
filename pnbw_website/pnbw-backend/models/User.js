@@ -8,7 +8,20 @@ const userSchema = new mongoose.Schema(
     phone: { type: String, unique: true, sparse: true },
     password: String,                 // only used for email login
     isBroker: { type: Boolean, default: false },
-    referralCode: String
+    referralCode: String,
+    
+    // 👇 ADDED fields for role-based login and OTP/magic link auth
+    role: {
+      type: String,
+      enum: ['admin', 'agent', 'customer'],
+      default: 'customer',
+      required: true,
+    },
+    otp: String,
+    otpExpires: Date,
+    magicLinkToken: String,
+    magicLinkTokenExpires: Date,
+    // 👆 ADDED fields
   },
   { timestamps: true }
 );

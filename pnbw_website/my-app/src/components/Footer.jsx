@@ -5,9 +5,9 @@ import { Twitter, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   const socialIcons = [
-    { href: 'https://x.com', icon: Twitter, color: 'hover:text-[#1DA1F2]' },
-    { href: 'https://facebook.com', icon: Facebook, color: 'hover:text-[#4267B2]' },
-    { href: 'https://instagram.com', icon: Instagram, color: 'hover:text-[#E1306C]' },
+    { href: 'https://x.comhttps://x.com/Pixienestbuild', icon: Twitter, color: 'hover:text-[#1DA1F2]' },
+    { href: 's://facebook.com', icon: Facebook, color: 'hover:text-[#4267B2]' },
+    { href: 'https://www.instagram.com/pixienestbuildwell/', icon: Instagram, color: 'hover:text-[#E1306C]' },
     { href: 'https://linkedin.com', icon: Linkedin, color: 'hover:text-[#0077B5]' },
   ];
 

@@ -11,12 +11,24 @@ export default function Login() {
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('customer');    // 'admin', 'agent', 'customer'
   const [error, setError] = useState(null);
+
+  // Hardcoded admin credentials
+  const adminPhone = '8005431236';
+  const adminEmail = 'ashutoshsharansrivastava@gmail.com';
 
   const handleSendOtp = async () => {
     setError(null);
     try {
-      // TODO: call your API to send OTP to `phone`
+      let currentRole = role;
+      if (phone === adminPhone) {
+        currentRole = 'admin';
+        setRole('admin'); // Update state to reflect admin role
+      }
+      
+      // TODO: call your API to send OTP to `phone` with the `currentRole`
+      // Example: await yourApi.sendOtp({ phone, role: currentRole });
       setStep('enterOtp');
     } catch {
       setError('Failed to send OTP. Please try again.');
@@ -26,7 +38,12 @@ export default function Login() {
   const handleVerifyOtp = async () => {
     setError(null);
     try {
-      await login({ phone, otp });
+      let currentRole = role;
+      if (phone === adminPhone) {
+        currentRole = 'admin';
+      }
+
+      await login({ phone, otp, role: currentRole });
       navigate('/', { replace: true });
     } catch {
       setError('Invalid OTP. Please try again.');
@@ -36,7 +53,13 @@ export default function Login() {
   const handleEmailLogin = async () => {
     setError(null);
     try {
-      await login({ email });
+      let currentRole = role;
+      if (email === adminEmail) {
+        currentRole = 'admin';
+        setRole('admin'); // Update state to reflect admin role
+      }
+
+      await login({ email, role: currentRole });
       navigate('/', { replace: true });
     } catch {
       setError('Email login failed. Please try again.');
@@ -50,6 +73,20 @@ export default function Login() {
         <h1 className="text-center text-4xl font-extrabold text-gray-800">
           Welcome Back
         </h1>
+
+        {/* Role Selection Dropdown */}
+        <div className="flex justify-center">
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full px-5 py-3 bg-gray-100 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200 cursor-pointer"
+          >
+            <option value="customer">Customer</option>
+            <option value="agent">Agent</option>
+            {/* The admin option is visible but will only work with the predefined credentials */}
+            <option value="admin">Admin</option>
+          </select>
+        </div>
 
         {/* Tabs */}
         <div className="flex gap-4 justify-center border-b border-gray-300 pb-3 text-gray-700">

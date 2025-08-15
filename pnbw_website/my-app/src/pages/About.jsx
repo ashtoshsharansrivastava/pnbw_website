@@ -145,7 +145,7 @@ export default function About() {
             <div className="flex flex-col items-center text-center p-6 bg-blue-50 rounded-lg shadow-md">
               <div className="w-32 h-32 rounded-full mb-4 overflow-hidden flex items-center justify-center bg-gray-200">
                 <img 
-                  src="/images/hans-raj-singh.jpg" 
+                  src="/images/hansraj.jpg" 
                   alt="Mr. Hans Raj Singh, Co-Founder & CEO" 
                   className="w-full h-full object-cover"
                 />
