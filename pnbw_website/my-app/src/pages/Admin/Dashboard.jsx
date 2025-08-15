@@ -1,59 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Users, MapPin, LayoutDashboard, Settings, LifeBuoy } from 'lucide-react'; // Import Lucide icons
+import { Users, MapPin } from 'lucide-react'; // Only import the icons needed
 
 export default function Dashboard() {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-10 px-6 sm:px-10 md:px-16 lg:px-24">
-      <div className="w-full max-w-4xl mx-auto space-y-10">
-        <h1 className="text-4xl font-extrabold text-gray-900 text-center drop-shadow-md">
-          Admin <span className="text-blue-600">Dashboard</span>
-        </h1>
+    <section className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-5xl mx-auto space-y-12">
+        <div className="text-center">
+          <h1 className="text-5xl font-extrabold text-gray-900 leading-tight">
+            Admin <span className="text-indigo-600">Dashboard</span>
+          </h1>
+          <p className="mt-4 text-xl text-gray-600">
+            Streamline your workflow with essential management tools.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Manage Brokers Card */}
           <Link
             to="brokers"
-            className="flex flex-col items-center justify-center p-8 bg-white rounded-2xl shadow-xl border border-gray-100
-                       hover:bg-blue-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+            className="group flex flex-col items-center justify-center p-10 bg-white rounded-3xl shadow-lg border border-gray-200
+                       hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1
+                       focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
           >
-            <div className="text-blue-600 mb-4">
-              <Users size={64} strokeWidth={1.5} />
+            <div className="text-indigo-600 mb-6 transition-all duration-300 group-hover:scale-110">
+              <Users size={80} strokeWidth={1.5} />
             </div>
-            <span className="text-2xl font-bold text-gray-900 mb-2">Manage Brokers</span>
-            <p className="text-gray-600 text-center">Oversee broker accounts, performance, and approvals.</p>
+            <span className="text-3xl font-bold text-gray-900 mb-2">Manage Brokers</span>
+            <p className="text-gray-600 text-center text-lg">
+              View, edit, and approve broker accounts and manage their activities.
+            </p>
           </Link>
 
           {/* Manage Sites Card */}
           <Link
             to="sites"
-            className="flex flex-col items-center justify-center p-8 bg-white rounded-2xl shadow-xl border border-gray-100
-                       hover:bg-blue-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+            className="group flex flex-col items-center justify-center p-10 bg-white rounded-3xl shadow-lg border border-gray-200
+                       hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1
+                       focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
           >
-            <div className="text-blue-600 mb-4">
-              <MapPin size={64} strokeWidth={1.5} />
+            <div className="text-indigo-600 mb-6 transition-all duration-300 group-hover:scale-110">
+              <MapPin size={80} strokeWidth={1.5} />
             </div>
-            <span className="text-2xl font-bold text-gray-900 mb-2">Manage Sites</span>
-            <p className="text-gray-600 text-center">Add, edit, and remove property listings and locations.</p>
+            <span className="text-3xl font-bold text-gray-900 mb-2">Manage Sites</span>
+            <p className="text-gray-600 text-center text-lg">
+              Add new properties, update existing listings, and manage locations.
+            </p>
           </Link>
-
-          {/* Placeholder for other admin actions */}
-          <div className="flex flex-col items-center justify-center p-8 bg-white rounded-2xl shadow-xl border border-gray-100
-                          hover:bg-blue-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-            <div className="text-gray-500 mb-4">
-              <Settings size={64} strokeWidth={1.5} />
-            </div>
-            <span className="text-2xl font-bold text-gray-900 mb-2">System Settings</span>
-            <p className="text-gray-600 text-center">Configure application-wide parameters and preferences.</p>
-          </div>
-
-          <div className="flex flex-col items-center justify-center p-8 bg-white rounded-2xl shadow-xl border border-gray-100
-                          hover:bg-blue-50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-            <div className="text-gray-500 mb-4">
-              <LifeBuoy size={64} strokeWidth={1.5} />
-            </div>
-           
-          </div>
         </div>
       </div>
     </section>

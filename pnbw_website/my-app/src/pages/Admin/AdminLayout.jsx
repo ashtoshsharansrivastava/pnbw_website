@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore.js';
-import { LayoutDashboard, Users, MapPin, Settings, LifeBuoy, LogOut } from 'lucide-react'; // Import Lucide icons
+// Removed Settings and LifeBuoy from the import statement
+import { LayoutDashboard, Users, MapPin, LogOut } from 'lucide-react'; 
 
 export default function AdminLayout() {
   const user = useAuthStore((s) => s.user);
@@ -43,12 +44,7 @@ export default function AdminLayout() {
           <NavLink to="/admin/sites" className={navLinkClass}>
             <MapPin size={20} /> Site Management
           </NavLink>
-          <NavLink to="#" className={navLinkClass}>
-            <Settings size={20} /> Settings
-          </NavLink>
-          <NavLink to="#" className={navLinkClass}>
-            <LifeBuoy size={20} /> Help & Support
-          </NavLink>
+          {/* Removed the NavLinks for Settings and Help & Support */}
         </nav>
 
         {/* User & Logout */}
