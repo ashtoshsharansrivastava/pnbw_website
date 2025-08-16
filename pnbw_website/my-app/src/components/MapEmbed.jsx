@@ -4,8 +4,8 @@ import React from 'react';
 // import { MapPin } from 'lucide-react'; 
 
 export default function MapEmbed({ lat, lng, address }) {
-  // This URL format is reliable for embedding Google Maps using latitude and longitude.
-  const mapUrl = `https://maps.google.com/maps?q=${lat},${lng}&hl=en&z=14&amp;output=embed`;
+  // Correctly interpolate the lat and lng variables into the URL
+  const mapUrl = `https://maps.google.com/maps?q=${lat},${lng}&hl=en&z=14&output=embed`;
 
   return (
     <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">

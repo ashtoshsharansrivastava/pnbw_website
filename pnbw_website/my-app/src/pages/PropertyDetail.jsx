@@ -84,6 +84,14 @@ export default function PropertyDetail() {
     );
   }
 
+  const getPriceDisplay = (price) => {
+    if (price && typeof price === 'string') {
+      return price;
+    }
+    // Fallback if price is a number, though based on the previous request, it's a string.
+    return toLakhs(price);
+  };
+
   // Dummy reviews for demonstration
   const dummyReviews = [
     { author: "Anjali Sharma", rating: 5, comment: "Absolutely loved the property! The process was so smooth and transparent." },
@@ -149,7 +157,7 @@ export default function PropertyDetail() {
 
           <div className="flex flex-col sm:flex-row justify-between items-center mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
             <p className="text-3xl sm:text-4xl font-extrabold text-blue-600 flex items-center">
-              <FiTag className="mr-2" /> {toLakhs(property.price)}
+              <FiTag className="mr-2" /> {getPriceDisplay(property.price)}
             </p>
             <button
               onClick={() => setIsEnquireModalOpen(true)}

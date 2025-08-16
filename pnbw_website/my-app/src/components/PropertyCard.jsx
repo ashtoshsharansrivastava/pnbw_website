@@ -10,13 +10,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay'; // Import autoplay CSS
 
-/* helper: 6 200 000 → “62 Lakh” */
-const toLakhs = (rupees) => {
-  if (rupees === undefined || rupees === null) return 'N/A';
-  // Ensure rupees is a number before rounding
-  const numRupees = Number(rupees);
+/* helper to format the price display based on type */
+const getPriceDisplay = (price) => {
+  if (typeof price === 'string') {
+    return price;
+  }
+  // Fallback for numeric prices, if any are left
+  if (price === undefined || price === null) return 'N/A';
+  const numRupees = Number(price);
   if (isNaN(numRupees)) return 'N/A';
-
   const lakhs = Math.round(numRupees / 1_00_000);
   return `${lakhs} Lakh`;
 };
@@ -26,7 +28,7 @@ export default function PropertyCard({ property }) {
     id,
     title,              // “Indirapuram, Ghaziabad”
     locality,           // “Locality 1” (or derive from title)
-    price,              // 6200000
+    price,              // Can be a number or a string like '₹ 30 Lakh - 1 Cr+'
     units = 0,          // 2500 (optional, e.g., sq ft or property count)
     images = [],        // e.g. ['house1.jpg','house1b.jpg']
     city,               // Added city for better display
@@ -87,7 +89,7 @@ export default function PropertyCard({ property }) {
           <FiMapPin className="mr-1 text-blue-500" /> {displayLocality}, {displayCity}
         </p>
         <p className="text-md text-gray-700 flex items-center font-semibold">
-          <FiTag className="mr-1 text-green-500" /> {toLakhs(price)}
+          <FiTag className="mr-1 text-green-500" /> {getPriceDisplay(price)}
         </p>
         {propertyType && (
           <p className="text-sm text-gray-600 flex items-center">
