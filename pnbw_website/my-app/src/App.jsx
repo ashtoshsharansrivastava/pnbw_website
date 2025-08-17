@@ -1,18 +1,19 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+// Assuming these are all in direct subdirectories of src/
 import Layout from './components/Layout.jsx';
-// Removed direct Header and Footer imports as they are likely in Layout.jsx
-// import Header from './components/Header.jsx';
-// import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Services from './pages/Services.jsx';
 import Contact from './pages/Contact.jsx';
-import Properties from './pages/Properties.jsx'; // Correctly imported Properties page component
+import Properties from './pages/Properties.jsx';
 import PropertyDetail from './pages/PropertyDetail.jsx';
 import Login from './pages/Auth/Login.jsx';
 import SignUp from './pages/Auth/SignUp.jsx';
+import ForgotPassword from './pages/Auth/ForgotPassword.jsx';
+import ResetPassword from './pages/Auth/ResetPassword.jsx';
+
 import BrokerDashboard from './pages/BrokerDashboard.jsx';
 import AdminLayout from './pages/Admin/AdminLayout.jsx';
 import Dashboard from './pages/Admin/Dashboard.jsx';
@@ -34,19 +35,19 @@ export default function App() {
   return (
     <div className="bg-midnight text-white min-h-screen"> {/* Apply the dark-blue background globally */}
       <Layout>
-        {/* Removed Header and Footer here, as Layout.jsx typically renders them */}
-        {/* <Header /> */}
-        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/properties" element={<Properties />} />
-          {/* CORRECTED LINE: Changed path from "/property/:id" to "/properties/:id" */}
           <Route path="/properties/:id" element={<PropertyDetail />} />
+          
+          {/* Authentication Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} /> {/* New Forgot Password Route */}
+          <Route path="/reset-password/:token" element={<ResetPassword />} /> {/* Reset Password Route */}
 
           <Route
             path="/broker"
@@ -70,7 +71,6 @@ export default function App() {
             <Route path="sites" element={<SiteManagement />} />
           </Route>
         </Routes>
-        {/* <Footer /> */}
       </Layout>
     </div>
   );
