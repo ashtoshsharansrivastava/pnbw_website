@@ -10,7 +10,7 @@ export default function About() {
         <section className="text-center bg-gradient-to-b from-white via-blue-50 to-white rounded-2xl p-12 shadow-sm">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
-              About <span className="text-blue-600">PNBW Officials</span>
+              About <span className="text-blue-600">PixieNest BuildWell</span>
             </h1>
             <div className="mt-6 mb-8 w-24 h-1.5 bg-blue-600 mx-auto rounded-full" />
             <p className="text-gray-700 text-xl sm:text-2xl max-w-3xl mx-auto">
@@ -34,7 +34,7 @@ export default function About() {
             {/* Right Column: Content */}
             <div className="lg:col-span-2 space-y-5">
               <p className="text-gray-800 leading-relaxed text-lg">
-                <strong>PixieNest BuildWell Pvt Ltd</strong>, operating as PNBW Officials, was founded on <strong>February 12, 2018</strong>, by visionary founder <strong>Mr. Hans Raj Singh</strong>. His journey began with a passion to revolutionize the real estate landscape in India, making property transactions transparent, accessible, and truly rewarding for everyone involved.
+                <strong>PixieNest BuildWell Pvt Ltd</strong>, operating as PixieNest BuildWell, was founded on <strong>February 12, 2018</strong>, by visionary founder <strong>Mr. Hans Raj Singh</strong>. His journey began with a passion to revolutionize the real estate landscape in India, making property transactions transparent, accessible, and truly rewarding for everyone involved.
               </p>
               <p className="text-gray-800 leading-relaxed text-lg">
                 What started as a commitment to redefine real estate has blossomed into a trusted platform, connecting countless individuals with their ideal properties and empowering partners across the nation. We blend cutting-edge technology with deep industry expertise, ensuring a seamless experience from your first search to the final handshake.
@@ -169,7 +169,7 @@ export default function About() {
         <section className="bg-white p-8 sm:p-10 rounded-xl shadow-lg space-y-6 text-center border border-gray-100">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 border-b-2 border-blue-500 pb-3 mb-4">Join Us on This Journey</h2>
           <p className="text-gray-800 leading-relaxed text-lg max-w-3xl mx-auto">
-            Whether you’re a first-time homebuyer, an experienced investor, or a valued channel partner, PNBW Officials is designed to unlock your next opportunity. Explore our curated listings, connect with top agents, or reach out directly to discover how we can empower your real estate aspirations.
+            Whether you’re a first-time homebuyer, an experienced investor, or a valued channel partner, PixieNest BuildWell is designed to unlock your next opportunity. Explore our curated listings, connect with top agents, or reach out directly to discover how we can empower your real estate aspirations.
           </p>
           <div className="pt-4">
             <a
