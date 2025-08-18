@@ -6,7 +6,7 @@ export default function About() {
       {/* Edge-to-edge container with responsive padding */}
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 xl:px-24 space-y-16 sm:space-y-20">
 
-        {/* ── Hero Section (Design Modified) ─────────────────────────────────── */}
+        {/* ── Hero Section ─────────────────────────────────── */}
         <section className="text-center bg-gradient-to-b from-white via-blue-50 to-white rounded-2xl p-12 shadow-sm">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
@@ -19,7 +19,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* ── Our Story (Design Modified) ────────────────────────────────── */}
+        {/* ── Our Story ────────────────────────────────── */}
         <section className="bg-white p-8 sm:p-12 rounded-2xl shadow-lg border border-gray-100">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8 items-start">
             {/* Left Column: Heading */}
@@ -34,7 +34,7 @@ export default function About() {
             {/* Right Column: Content */}
             <div className="lg:col-span-2 space-y-5">
               <p className="text-gray-800 leading-relaxed text-lg">
-                <strong>PixieNest BuildWell Pvt Ltd</strong>, operating as PNBW Officials, was founded on <strong>February 12, 2018</strong>, by the visionary duo, <strong>Mr. Hans Raj Singh</strong> and <strong>Mrs. Moni Singh</strong>. Their journey began with a shared passion to revolutionize the real estate landscape in India, making property transactions transparent, accessible, and truly rewarding for everyone involved.
+                <strong>PixieNest BuildWell Pvt Ltd</strong>, operating as PNBW Officials, was founded on <strong>February 12, 2018</strong>, by visionary founder <strong>Mr. Hans Raj Singh</strong>. His journey began with a passion to revolutionize the real estate landscape in India, making property transactions transparent, accessible, and truly rewarding for everyone involved.
               </p>
               <p className="text-gray-800 leading-relaxed text-lg">
                 What started as a commitment to redefine real estate has blossomed into a trusted platform, connecting countless individuals with their ideal properties and empowering partners across the nation. We blend cutting-edge technology with deep industry expertise, ensuring a seamless experience from your first search to the final handshake.
@@ -137,39 +137,29 @@ export default function About() {
           </ul>
         </section>
 
-        {/* ── Meet the Founders ──────────────────────────────────────────────── */}
+        {/* ── Meet the Founder (REDESIGNED) ────────────────────────────────── */}
         <section className="bg-white p-8 sm:p-10 rounded-xl shadow-lg space-y-6 border border-gray-100">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 border-b-2 border-blue-500 pb-3 mb-4">Meet the Founders</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Founder 1: Mr. Hans Raj Singh */}
-            <div className="flex flex-col items-center text-center p-6 bg-blue-50 rounded-lg shadow-md">
-              <div className="w-32 h-32 rounded-full mb-4 overflow-hidden flex items-center justify-center bg-gray-200">
-                <img 
-                  src="/images/hansraj.jpg" 
-                  alt="Mr. Hans Raj Singh, Co-Founder & CEO" 
-                  className="w-full h-full object-cover"
-                />
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 border-b-2 border-blue-500 pb-3 mb-4">Meet the Founder</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-blue-50 rounded-lg p-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center transform transition-transform duration-300 hover:scale-105">
+              {/* Image Column */}
+              <div className="md:col-span-1 flex justify-center">
+                <div className="w-40 h-40 rounded-full overflow-hidden shadow-lg border-4 border-white">
+                  <img 
+                    src="/images/hansraj.jpg" 
+                    alt="Mr. Hans Raj Singh, Founder & CEO" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900">Mr. Hans Raj Singh</h3>
-              <p className="text-blue-600 text-lg">Co-Founder & CEO</p>
-              <p className="text-gray-700 mt-2 leading-relaxed">
-                A seasoned real estate veteran with over two decades of experience, Mr. Singh brings unparalleled strategic vision and a deep understanding of market dynamics to PNBW Officials.
-              </p>
-            </div>
-            {/* Founder 2: Mrs. Moni Singh */}
-            <div className="flex flex-col items-center text-center p-6 bg-blue-50 rounded-lg shadow-md">
-              <div className="w-32 h-32 rounded-full mb-4 overflow-hidden flex items-center justify-center bg-gray-200">
-                <img 
-                  src="/images/moni-singh.jpg" 
-                  alt="Mrs. Moni Singh, Co-Founder & COO" 
-                  className="w-full h-full object-cover"
-                />
+              {/* Text Column */}
+              <div className="md:col-span-2 text-center md:text-left space-y-3">
+                <h3 className="text-3xl font-bold text-gray-900">Mr. Hans Raj Singh</h3>
+                <p className="text-blue-600 text-xl font-semibold">Founder & CEO</p>
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  A seasoned real estate veteran with over two decades of experience, Mr. Singh brings unparalleled strategic vision and a deep understanding of market dynamics to PNBW Officials.
+                </p>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900">Mrs. Moni Singh</h3>
-              <p className="text-blue-600 text-lg">Co-Founder & COO</p>
-              <p className="text-gray-700 mt-2 leading-relaxed">
-                With a strong background in operations and customer advocacy, Mrs. Singh ensures that every client interaction is seamless, transparent, and built on trust, driving our commitment to excellence.
-              </p>
             </div>
           </div>
         </section>
