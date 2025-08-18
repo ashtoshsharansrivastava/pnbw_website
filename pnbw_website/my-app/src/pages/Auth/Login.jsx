@@ -10,16 +10,16 @@ const Icon = ({ path, className = "w-6 h-6" }) => (
 );
 
 export default function Login() {
-  // --- All your existing state and logic remains unchanged ---
   const navigate = useNavigate();
   const login = useAuthStore((s) => s.login);
 
-  const [tab, setTab] = useState('email');         // 'phone' or 'email', default to email
-  const [step, setStep] = useState('enterPhone');  // for phone flow
+  const [tab, setTab] = useState('email');
+  const [step, setStep] = useState('enterPhone');
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('customer');    // 'admin', 'agent', 'customer'
+  const [password, setPassword] = useState(''); // --- ADDED: State for password
+  const [role, setRole] = useState('customer');
   const [error, setError] = useState(null);
   const [phoneError, setPhoneError] = useState(null);
   const [emailError, setEmailError] = useState(null);
@@ -96,29 +96,32 @@ export default function Login() {
     }
   };
 
+  // --- MODIFIED: Email login handler to include password ---
   const handleEmailLogin = async () => {
     setError(null);
     if (!validateEmail(email)) return;
+    if (!password) {
+        setError("Password cannot be empty."); // Basic check
+        return;
+    }
     try {
       let currentRole = role;
       if (email === adminEmail) {
         currentRole = 'admin';
         setRole('admin');
       }
-      await login({ email, role: currentRole });
+      // Pass the password to the login store action
+      await login({ email, password, role: currentRole });
       navigate('/', { replace: true });
     } catch (err) {
-      setError('Email login failed. Please try again.');
+      setError('Invalid email or password. Please try again.');
       console.error('Email login error:', err);
     }
   };
 
   const isPhoneValid = phone.length > 0 && !phoneError;
   const isEmailValid = email.length > 0 && !emailError;
-  // --- End of unchanged logic ---
 
-
-  // --- Redesigned UI starts here ---
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 font-sans">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-slate-200 p-8 space-y-6">
@@ -175,9 +178,10 @@ export default function Login() {
 
         {/* Form Content */}
         <div className="space-y-4">
-          {/* Email Flow */}
+          {/* Email Flow --- MODIFIED --- */}
           {tab === 'email' && (
             <div className="space-y-4">
+              {/* Email Input */}
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <Icon path="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.9-3.563A3.75 3.75 0 1112 15.563a3.75 3.75 0 01-1.15-2.813z" className="w-5 h-5 text-slate-400"/>
@@ -194,12 +198,29 @@ export default function Login() {
                 />
               </div>
               {emailError && <p className="text-red-600 text-xs font-medium">{emailError}</p>}
+              
+              {/* --- ADDED: Password Input --- */}
+              <div className="relative">
+                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <Icon path="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" className="w-5 h-5 text-slate-400"/>
+                </span>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Your password"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 text-slate-800 rounded-lg placeholder-slate-400 border border-slate-200 focus:outline-none focus:ring-2 focus:border-blue-500 focus:ring-blue-500/20 transition-colors"
+                />
+              </div>
+
               <button
                 onClick={handleEmailLogin}
-                disabled={!isEmailValid}
+                // --- MODIFIED: Disable if email is invalid OR password is empty ---
+                disabled={!isEmailValid || !password}
                 className="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
               >
-                Send Magic Link
+                {/* --- MODIFIED: Button text --- */}
+                Sign In
               </button>
             </div>
           )}
